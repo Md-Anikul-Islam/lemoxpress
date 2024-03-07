@@ -125,6 +125,22 @@
                         </ul>
                     </div>
                 </li>
+
+
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#driverPages" aria-expanded="false" aria-controls="driverPages" class="side-nav-link">
+                        <i class="ri-pages-line"></i>
+                        <span> Driver </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="driverPages">
+                        <ul class="side-nav-second-level">
+                            <li>
+                                <a href="{{route('driver.list')}}">Driver List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <div class="clearfix"></div>
         </div>

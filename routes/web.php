@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\DriverController;
 use App\Http\Controllers\admin\FleetController;
 use App\Http\Controllers\admin\FleetTypeController;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,9 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/fleet-store', [FleetController::class, 'store'])->name('fleet.store');
     Route::put('/fleet-update/{id}', [FleetController::class, 'update'])->name('fleet.update');
     Route::get('/fleet-delete/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
+
+
+    //Fleet Section
+    Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');
 });
 require __DIR__.'/auth.php';
