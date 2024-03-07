@@ -60,7 +60,7 @@
 
 
                                         <div class="mb-0 text-start">
-                                            <button class="btn btn-soft-primary w-100" type="submit"><i class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log In</span> </button>
+                                            <button class="btn btn-soft-danger w-100" type="submit"><i class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log In</span> </button>
                                         </div>
                                     </form>
                                 </div>

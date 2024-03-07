@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\api\DriverController;
+use App\Http\Controllers\api\FleetSearchController;
+use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/fleet-search/{fleet_type}', [FleetSearchController::class, 'search']);
+
+//Driver
+Route::post('/drivers', [DriverController::class, 'storeDriver']);
+Route::post('/drivers-history', [DriverController::class, 'storeDriverHistory']);
+Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHistory']);
+
+//User
+Route::post('/user-history', [UserController::class, 'storeUserHistory']);
