@@ -30,6 +30,22 @@ class UserController extends Controller
         return response()->json(['user' => $user], 201);
     }
 
+    public function loginUser(Request $request)
+    {
+        $request->validate([
+            'uid' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $user = User::where('uid', $request->uid)->where('phone', $request->phone)->first();
+
+        if ($user) {
+            return response()->json(['user' => $user], 200);
+        } else {
+            return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
+        }
+    }
+
     public function storeUserHistory(Request $request)
     {
         $request->validate([
