@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\DriverHistory;
+use App\Models\Fleet;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -26,9 +27,11 @@ class DriverController extends Controller
 
         $driver = new Driver();
         $driver->did = $request->did;
+        $driver->car_id = $request->car_id;
         $driver->name = $request->name;
         $driver->email = $request->email;
         $driver->phone = $request->phone;
+        $driver->status = 0;
         if($request->profile){
             $profile = time().'.'.$request->profile->extension();
             $request->profile->move(public_path('images/profile'), $profile);
@@ -60,7 +63,9 @@ class DriverController extends Controller
         $driver->ratting = $request->ratting ?? 0;
         $driver->save();
 
-        return response()->json(['driver' => $driver], 201);
+        $fleet = Fleet::find($request->car_id);
+
+        return response()->json(['driver' => $driver,'fleet' => $fleet], 201);
     }
 
 

@@ -11,6 +11,7 @@ class Driver extends Model
 
     protected $fillable = [
         'did',
+        'car_id',
         'name',
         'email',
         'phone',
@@ -25,5 +26,10 @@ class Driver extends Model
     public function histories()
     {
         return $this->hasMany(DriverHistory::class, 'did', 'did');
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Fleet::class, 'car_id');
     }
 }
