@@ -29,9 +29,10 @@
                     <tr>
                         <th>S/N</th>
                         <th>Fleet Type Name</th>
+                        <th>Name</th>
+                        <th>Image</th>
                         <th>Model</th>
                         <th>Color</th>
-                        <th>Number</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -42,10 +43,13 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$fleetData->fleetType->name}}</td>
-                            <td>{{$fleetData->model}}</td>
-                            <td>{{$fleetData->color}}</td>
-                            <td>{{$fleetData->number}}</td>
-                            <td>{{$fleetData->base_fare_amount}}</td>
+                            <td>{{$fleetData->car_name}}</td>
+                            <td>
+                                <img src="{{asset('images/carImage/'. $fleetData->car_image )}}" alt="Current Image" style="max-width: 50px;">
+                            </td>
+                            <td>{{$fleetData->car_model}}</td>
+                            <td>{{$fleetData->car_color}}</td>
+                            <td>{{$fleetData->car_base}}</td>
                             <td>{{$fleetData->status==1? 'Active':'Inactive'}}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex justify-content-end gap-1">
@@ -62,7 +66,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="{{route('fleet.update',$fleetData->id)}}">
+                                            <form method="post" action="{{route('fleet.update',$fleetData->id)}}" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="row">
@@ -70,37 +74,49 @@
 
                                                         <div class="mb-2">
                                                             <label for="example-select" class="form-label">Type</label>
-                                                            <select name="fleet_type_id" class="form-select" id="example-select">
+                                                            <select name="car_type" class="form-select" id="example-select">
                                                                 <option>Select Type</option>
                                                                 @foreach($fleetType as $fleetTypeData)
-                                                                    <option value="{{$fleetTypeData->id}}" {{$fleetTypeData->id == $fleetData->fleet_type_id ? 'selected' : ''}}>{{$fleetTypeData->name}}</option>
+                                                                    <option value="{{$fleetTypeData->id}}" {{$fleetTypeData->id == $fleetData->car_type ? 'selected' : ''}}>{{$fleetTypeData->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
 
                                                         <div class="mb-2">
-                                                            <label for="model" class="form-label">Model</label>
-                                                            <input type="text" id="model" name="model" value="{{$fleetData->model}}"
+                                                            <label for="car_name" class="form-label">Name</label>
+                                                            <input type="text" id="car_name" name="car_name" value="{{$fleetData->car_name}}"
+                                                                   class="form-control" placeholder="Enter Car Name" required>
+                                                        </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="car_model" class="form-label">Model</label>
+                                                            <input type="text" id="car_model" name="car_model" value="{{$fleetData->car_model}}"
                                                                    class="form-control" placeholder="Enter Fleet model" required>
                                                         </div>
 
                                                         <div class="mb-2">
-                                                            <label for="color" class="form-label">Color</label>
-                                                            <input type="text" id="color" name="color" value="{{$fleetData->color}}"
+                                                            <label for="car_color" class="form-label">Color</label>
+                                                            <input type="text" id="car_color" name="car_color" value="{{$fleetData->car_color}}"
                                                                    class="form-control" placeholder="Enter Fleet color" required>
                                                         </div>
 
 
                                                         <div class="mb-2">
-                                                            <label for="number" class="form-label">Number</label>
-                                                            <input type="text" id="number" name="number" value="{{$fleetData->number}}"
-                                                                   class="form-control" placeholder="Enter Fleet Number" required>
+                                                            <label for="passengers" class="form-label">Passengers</label>
+                                                            <input type="text" id="passengers" name="passengers" value="{{$fleetData->passengers}}"
+                                                                   class="form-control" placeholder="Enter Fleet Passengers" required>
                                                         </div>
 
                                                         <div class="mb-2">
-                                                            <label for="base_fare_amount" class="form-label">Amount Per K.M.</label>
-                                                            <input type="text" id="base_fare_amount" name="base_fare_amount" value="{{$fleetData->base_fare_amount}}"
+                                                            <label for="car_base" class="form-label">Amount Per K.M.</label>
+                                                            <input type="text" id="car_base" name="car_base" value="{{$fleetData->car_base}}"
                                                                    class="form-control" placeholder="Enter Fleet Amount Per K.M." required>
+                                                        </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="car_base" class="form-label">Car Image</label>
+                                                            <input type="file" id="car_image" name="car_image"
+                                                                   class="form-control" placeholder="Enter Fleet Image">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -155,43 +171,56 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('fleet.store')}}">
+                    <form method="post" action="{{route('fleet.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12">
 
                                 <div class="mb-2">
                                     <label for="example-select" class="form-label">Type</label>
-                                    <select name="fleet_type_id" class="form-select" id="example-select">
+                                    <select name="car_type" class="form-select" id="example-select">
                                         <option>Select Type</option>
                                         @foreach($fleetType as $fleetTypeData)
                                         <option value="{{$fleetTypeData->id}}">{{$fleetTypeData->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="mb-2">
-                                    <label for="model" class="form-label">Model</label>
-                                    <input type="text" id="model" name="model"
+                                    <label for="car_name" class="form-label">Name</label>
+                                    <input type="text" id="car_name" name="car_name"
+                                           class="form-control" placeholder="Enter Car Name" required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="car_model" class="form-label">Model</label>
+                                    <input type="text" id="car_model" name="car_model"
                                            class="form-control" placeholder="Enter Fleet model" required>
                                 </div>
 
                                 <div class="mb-2">
-                                    <label for="color" class="form-label">Color</label>
-                                    <input type="text" id="color" name="color"
+                                    <label for="car_color" class="form-label">Color</label>
+                                    <input type="text" id="car_color" name="car_color"
                                            class="form-control" placeholder="Enter Fleet color" required>
                                 </div>
 
 
                                 <div class="mb-2">
-                                    <label for="number" class="form-label">Number</label>
-                                    <input type="text" id="number" name="number"
-                                           class="form-control" placeholder="Enter Fleet Number" required>
+                                    <label for="passengers" class="form-label">Passengers</label>
+                                    <input type="text" id="passengers" name="passengers"
+                                           class="form-control" placeholder="Enter Fleet Passengers" required>
                                 </div>
 
                                 <div class="mb-2">
-                                    <label for="base_fare_amount" class="form-label">Amount Per K.M.</label>
-                                    <input type="text" id="base_fare_amount" name="base_fare_amount"
+                                    <label for="car_base" class="form-label">Amount Per K.M.</label>
+                                    <input type="text" id="car_base" name="car_base"
                                            class="form-control" placeholder="Enter Fleet Amount Per K.M." required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="car_base" class="form-label">Car Image</label>
+                                    <input type="file" id="car_image" name="car_image"
+                                           class="form-control" placeholder="Enter Fleet Image" required>
                                 </div>
                             </div>
                         </div>

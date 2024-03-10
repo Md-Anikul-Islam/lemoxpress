@@ -29,12 +29,34 @@ class DriverController extends Controller
         $driver->name = $request->name;
         $driver->email = $request->email;
         $driver->phone = $request->phone;
-        // Save images to public folder and store their paths in database
-        $driver->profile = $request->file('profile')->store('public/images/profile');
-        $driver->driving_licence_font_image = $request->file('driving_licence_font_image')->store('public/images/licence');
-        $driver->driving_licence_back_image = $request->file('driving_licence_back_image')->store('public/images/licence');
-        $driver->rta_card_font_image = $request->file('rta_card_font_image')->store('public/images/rta');
-        $driver->rta_card_back_image = $request->file('rta_card_back_image')->store('public/images/rta');
+        if($request->profile){
+            $profile = time().'.'.$request->profile->extension();
+            $request->profile->move(public_path('images/profile'), $profile);
+            $driver->profile = $profile;
+        }
+
+        if($request->driving_licence_font_image){
+            $driving_licence_font_image = time().'.'.$request->driving_licence_font_image->extension();
+            $request->driving_licence_font_image->move(public_path('images/driving_licence_font_image'), $driving_licence_font_image);
+            $driver->driving_licence_font_image = $driving_licence_font_image;
+        }
+
+        if($request->driving_licence_back_image){
+            $driving_licence_back_image = time().'.'.$request->driving_licence_back_image->extension();
+            $request->driving_licence_back_image->move(public_path('images/driving_licence_back_image'), $driving_licence_back_image);
+            $driver->driving_licence_back_image = $driving_licence_back_image;
+        }
+
+        if($request->rta_card_font_image){
+            $rta_card_font_image = time().'.'.$request->rta_card_font_image->extension();
+            $request->rta_card_font_image->move(public_path('images/rta_card_font_image'), $rta_card_font_image);
+            $driver->rta_card_font_image = $rta_card_font_image;
+        }
+        if($request->rta_card_back_image){
+            $rta_card_back_image = time().'.'.$request->rta_card_back_image->extension();
+            $request->rta_card_back_image->move(public_path('images/rta_card_back_image'), $rta_card_back_image);
+            $driver->rta_card_back_image = $rta_card_back_image;
+        }
         $driver->ratting = $request->ratting ?? 0;
         $driver->save();
 

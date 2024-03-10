@@ -20,12 +20,20 @@ class UserController extends Controller
             'phone' => 'required|string|unique:drivers',
             'userProfile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
+
+
+
         $user = new User();
         $user->uid = $request->uid;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->userProfile = $request->file('userProfile')->store('public/images/userProfile');
+        $user->role = 2;
+        if($request->userProfile){
+            $userProfile = time().'.'.$request->userProfile->extension();
+            $request->userProfile->move(public_path('images/userProfile'), $userProfile);
+            $user->userProfile = $userProfile;
+        }
         $user->save();
         return response()->json(['user' => $user], 201);
     }
@@ -40,11 +48,22 @@ class UserController extends Controller
         $user = User::where('uid', $request->uid)->where('phone', $request->phone)->first();
 
         if ($user) {
-            return response()->json(['user' => $user], 200);
+            // Selecting specific fields from the user object
+            $userData = [
+                'id' => $user->id,
+                'uid' => $user->uid,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'userProfile' => $user->userProfile,
+            ];
+
+            return response()->json(['user' => $userData], 200);
         } else {
             return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
         }
     }
+
 
     public function storeUserHistory(Request $request)
     {

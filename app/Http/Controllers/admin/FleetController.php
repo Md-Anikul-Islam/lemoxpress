@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Fleet;
 use App\Models\FleetType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Toastr;
 class FleetController extends Controller
 {
@@ -19,15 +20,24 @@ class FleetController extends Controller
     {
         try {
             $request->validate([
-                'fleet_type_id' => 'required',
-                'model' => 'required',
+                'car_type' => 'required',
+                'car_model' => 'required',
             ]);
+
+            if($request->car_image){
+                $car = time().'.'.$request->car_image->extension();
+                $request->car_image->move(public_path('images/carImage'), $car);
+            }
             $fleet = new Fleet();
-            $fleet->fleet_type_id = $request->fleet_type_id;
-            $fleet->model = $request->model;
-            $fleet->color = $request->color;
-            $fleet->number = $request->number;
-            $fleet->base_fare_amount = $request->base_fare_amount;
+            $fleet->car_type = $request->car_type;
+            $fleet->car_model = $request->car_model;
+            $fleet->car_name = $request->car_name;
+            $fleet->car_color = $request->car_color;
+            $fleet->car_base = $request->car_base;
+            $fleet->passengers = $request->passengers;
+            $fleet->car_image = $car??null;
+
+
             $fleet->save();
             Toastr::success('Fleet Added Successfully', 'Success');
             return redirect()->back();
@@ -39,17 +49,28 @@ class FleetController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $fleet = Fleet::findOrFail($id); // Find the fleet record by ID
+
             $request->validate([
-                'fleet_type_id' => 'required',
-                'model' => 'required',
+                'car_type' => 'required',
+                'car_model' => 'required',
+                'car_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Update validation for car image to be nullable
             ]);
-            $fleet = Fleet::find($id);
-            $fleet->fleet_type_id = $request->fleet_type_id;
-            $fleet->model = $request->model;
-            $fleet->color = $request->color;
-            $fleet->number = $request->number;
-            $fleet->base_fare_amount = $request->base_fare_amount;
+
+            // Update fleet attributes
+            $fleet->car_type = $request->car_type;
+            $fleet->car_model = $request->car_model;
+            $fleet->car_name = $request->car_name;
+            $fleet->car_color = $request->car_color;
+            $fleet->car_base = $request->car_base;
+            $fleet->passengers = $request->passengers;
             $fleet->status = $request->status;
+            // Check if a new image is uploaded
+            if($request->car_image){
+                $cover = time().'.'.$request->car_image->extension();
+                $request->car_image->move(public_path('images/carImage'), $cover);
+                $fleet->car_image = $cover;
+            }
             $fleet->save();
             Toastr::success('Fleet Updated Successfully', 'Success');
             return redirect()->back();
