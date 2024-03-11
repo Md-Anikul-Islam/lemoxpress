@@ -18,10 +18,10 @@ class DriverController extends Controller
             'email' => 'required|email|unique:drivers',
             'phone' => 'required|string|unique:drivers',
             'profile' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'driving_licence_font_image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'driving_licence_back_image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'rta_card_font_image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'rta_card_back_image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'driving_licence_font_image' => 'required|image|mimes:jpeg,png,jpg',
+            'driving_licence_back_image' => 'required|image|mimes:jpeg,png,jpg',
+            'rta_card_font_image' => 'required|image|mimes:jpeg,png,jpg',
+            'rta_card_back_image' => 'required|image|mimes:jpeg,png,jpg',
             'ratting' => 'numeric|nullable',
         ]);
 
@@ -97,4 +97,29 @@ class DriverController extends Controller
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
         }
     }
+
+    public function loginDriver(Request $request)
+    {
+        $request->validate([
+            'did' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $driver = Driver::where('did', $request->did)->where('phone', $request->phone)->first();
+        if($driver){
+            $fleet = Fleet::find($driver->car_id);
+        }
+
+
+        if ($driver) {
+            return response()->json(['driver' => $driver, 'fleet' => $fleet], 200);
+        } else {
+            return response()->json(['message' => 'No Driver found with this UID and phone. Please register.'], 404);
+        }
+    }
+
+
+
+
+
 }

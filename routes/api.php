@@ -26,6 +26,7 @@ Route::get('/fleet-search/{fleet_type}', [FleetSearchController::class, 'search'
 
 //Driver
 Route::post('/drivers', [DriverController::class, 'storeDriver']);
+Route::post('/driver-login', [DriverController::class, 'loginDriver']);
 Route::post('/drivers-history', [DriverController::class, 'storeDriverHistory']);
 Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHistory']);
 
