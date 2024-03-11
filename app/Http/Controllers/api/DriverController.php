@@ -22,16 +22,16 @@ class DriverController extends Controller
             'driving_licence_back_image' => 'required|image|mimes:jpeg,png,jpg',
             'rta_card_font_image' => 'required|image|mimes:jpeg,png,jpg',
             'rta_card_back_image' => 'required|image|mimes:jpeg,png,jpg',
-            'ratting' => 'numeric|nullable',
         ]);
 
         $driver = new Driver();
         $driver->did = $request->did;
-        $driver->car_id = $request->car_id;
+        $driver->car_id = (int)$request->car_id;
         $driver->name = $request->name;
         $driver->email = $request->email;
         $driver->phone = $request->phone;
         $driver->status = 0;
+        $driver->ratting = 0;
         if($request->profile){
             $profile = time().'.'.$request->profile->extension();
             $request->profile->move(public_path('images/profile'), $profile);
@@ -60,11 +60,8 @@ class DriverController extends Controller
             $request->rta_card_back_image->move(public_path('images/rta_card_back_image'), $rta_card_back_image);
             $driver->rta_card_back_image = $rta_card_back_image;
         }
-        $driver->ratting = $request->ratting ?? 0;
         $driver->save();
-
         $fleet = Fleet::find($request->car_id);
-
         return response()->json(['driver' => $driver,'fleet' => $fleet], 201);
     }
 
