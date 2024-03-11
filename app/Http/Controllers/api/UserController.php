@@ -11,17 +11,46 @@ class UserController extends Controller
 {
 
 
+//    public function storeUser(Request $request)
+//    {
+//        $request->validate([
+//            'uid' => 'required',
+//            'name' => 'required|string',
+//            'email' => 'required',
+//            'phone' => 'required|string|unique:drivers',
+//            'userProfile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+//        ]);
+//
+//
+//
+//        $user = new User();
+//        $user->uid = $request->uid;
+//        $user->name = $request->name;
+//        $user->email = $request->email;
+//        $user->phone = $request->phone;
+//        $user->role = 2;
+//        if($request->userProfile){
+//            $userProfile = time().'.'.$request->userProfile->extension();
+//            $request->userProfile->move(public_path('images/userProfile'), $userProfile);
+//            $user->userProfile = $userProfile;
+//        }
+//        $user->save();
+//        return response()->json(['user' => $user], 201);
+//    }
+
+
     public function storeUser(Request $request)
     {
         $request->validate([
             'uid' => 'required',
             'name' => 'required|string',
-            'email' => 'required',
-            'phone' => 'required|string|unique:drivers',
-            'userProfile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'userProfile' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
-
+        // Check if at least one of phone or email is filled
+        if (empty($request->phone) && empty($request->email)) {
+            return response()->json(['error' => 'Either phone or email must be filled.'], 422);
+        }
 
         $user = new User();
         $user->uid = $request->uid;
@@ -29,23 +58,26 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->role = 2;
-        if($request->userProfile){
+
+        if ($request->userProfile) {
             $userProfile = time().'.'.$request->userProfile->extension();
             $request->userProfile->move(public_path('images/userProfile'), $userProfile);
             $user->userProfile = $userProfile;
         }
+
         $user->save();
         return response()->json(['user' => $user], 201);
     }
 
+
+
     public function loginUser(Request $request)
     {
         $request->validate([
-            'uid' => 'required',
             'phone' => 'required',
         ]);
 
-        $user = User::where('uid', $request->uid)->where('phone', $request->phone)->first();
+        $user = User::where('phone', $request->phone)->first();
 
         if ($user) {
             // Selecting specific fields from the user object
@@ -58,7 +90,7 @@ class UserController extends Controller
                 'userProfile' => $user->userProfile,
             ];
 
-            return response()->json(['user' => $userData], 200);
+            return response()->json(['user' => $userData,'message' => 'User found'], 200);
         } else {
             return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
         }

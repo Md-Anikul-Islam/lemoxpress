@@ -101,20 +101,22 @@ class DriverController extends Controller
     public function loginDriver(Request $request)
     {
         $request->validate([
-            'did' => 'required',
             'phone' => 'required',
         ]);
 
-        $driver = Driver::where('did', $request->did)->where('phone', $request->phone)->first();
+        $driver = Driver::where('phone', $request->phone)->first();
         if($driver){
             $fleet = Fleet::find($driver->car_id);
         }
-
-
-        if ($driver) {
-            return response()->json(['driver' => $driver, 'fleet' => $fleet], 200);
-        } else {
-            return response()->json(['message' => 'No Driver found with this UID and phone. Please register.'], 404);
+        if($driver){
+            if ($driver->status == 1) {
+                return response()->json(['driver' => $driver, 'fleet' => $fleet,'message' => 'Driver found'], 200);
+            }elseif ($driver->status == 0){
+                return response()->json(['message' => 'Driver found But Your Account Suspend Please contact Authority'], 404);
+            }
+        }
+        else {
+            return response()->json(['message' => 'No Driver found with this phone. Please register.'], 404);
         }
     }
 
