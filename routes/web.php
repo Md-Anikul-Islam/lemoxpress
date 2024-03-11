@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DriverController;
 use App\Http\Controllers\admin\FleetController;
 use App\Http\Controllers\admin\FleetTypeController;
+use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +41,19 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/fleet-delete/{id}', [FleetController::class, 'destroy'])->name('fleet.destroy');
 
 
-    //Fleet Section
+    //Coupon Section
+    Route::get('/coupon-section', [CouponController::class, 'index'])->name('coupon.section');
+    Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
+    Route::put('/coupon-update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+    Route::get('/coupon-delete/{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
+
+
+    //Driver Section
     Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');
+    Route::get('/driver-active/{id}', [DriverController::class, 'active'])->name('driver.active');
+    Route::get('/driver-inactive/{id}', [DriverController::class, 'inactive'])->name('driver.inactive');
+
+    //User Section
+    Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');
 });
 require __DIR__.'/auth.php';

@@ -23,50 +23,37 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
+                        <th>UID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Profile</th>
-                        <th>Licence</th>
-                        <th>RTA Card</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($driver as $key=>$driverData)
+                    @foreach($user as $key=>$userData)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$driverData->name}}</td>
-                            <td>{{$driverData->email}}</td>
-                            <td>{{$driverData->phone}}</td>
+                            <td>{{$userData->uid}}</td>
+                            <td>{{$userData->name}}</td>
+                            <td>{{$userData->email? $userData->email:'N/A'}}</td>
+                            <td>{{$userData->phone? $userData->phone:'N/A'}}</td>
                             <td>
-                                <img src="{{asset('images/profile/'. $driverData->profile )}}" alt="Current Image" style="max-width: 70px;">
+                                <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="max-width: 70px;">
                             </td>
-                            <td>
-                                <img src="{{asset('images/driving_licence_font_image/'. $driverData->driving_licence_font_image )}}" alt="Current Image" style="max-width: 70px;">
-                            </td>
-                            <td>
-                                <img src="{{asset('images/rta_card_font_image/'. $driverData->rta_card_font_image )}}" alt="Current Image" style="max-width: 70px;">
-                            </td>
-                            <td>{{$driverData->status==1? 'Active':'Inactive'}}</td>
+                            <td>{{$userData->status==1? 'Active':'Inactive'}}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">History</button>
-                                    @if($driverData->status == 1)
-                                        <a href="{{route('driver.inactive',$driverData->id)}}" class="btn btn-danger">Inactive</a>
-                                    @else
-                                        <a href="{{route('driver.active',$driverData->id)}}" class="btn btn-success" >Active</a>
-                                    @endif
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$userData->id}}">History</button>
                                 </div>
-
                             </td>
                             <!--Edit Modal -->
-                            <div class="modal fade" id="editNewModalId{{$driverData->id}}" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editNewModalLabel{{$driverData->id}}" aria-hidden="true">
+                            <div class="modal fade" id="editNewModalId{{$userData->id}}" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editNewModalLabel{{$userData->id}}" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="addNewModalLabel{{$driverData->id}}">List</h4>
+                                            <h4 class="modal-title" id="addNewModalLabel{{$userData->id}}">List</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">

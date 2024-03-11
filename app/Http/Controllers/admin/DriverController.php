@@ -11,7 +11,19 @@ class DriverController extends Controller
     public function driverList()
     {
         $driver = Driver::with('histories')->latest()->get();
-        //dd($driver);
         return view('admin.pages.driver.index',compact('driver'));
+    }
+
+    public function inactive($id)
+    {
+        Driver::where('id',$id)->update(['status'=> 0]);
+        return Redirect()->back();
+
+    }
+
+    public function active($id)
+    {
+        Driver::where('id',$id)->update(['status'=> 1]);
+        return Redirect()->back();
     }
 }

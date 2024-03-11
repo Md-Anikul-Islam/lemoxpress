@@ -108,6 +108,8 @@
                     </a>
                 </li>
 
+
+
                 <li class="side-nav-item">
                     <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                         <i class="ri-pages-line"></i>
@@ -141,6 +143,30 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#userPages" aria-expanded="false" aria-controls="userPages" class="side-nav-link">
+                        <i class="ri-pages-line"></i>
+                        <span> User </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="userPages">
+                        <ul class="side-nav-second-level">
+                            <li>
+                                <a href="{{route('user.list')}}">User List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="side-nav-item">
+                    <a href="{{route('coupon.section')}}" class="side-nav-link">
+                        <i class="ri-dashboard-3-line"></i>
+                        <span> Coupon </span>
+                    </a>
+                </li>
+
+
             </ul>
             <div class="clearfix"></div>
         </div>
