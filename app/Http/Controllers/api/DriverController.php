@@ -112,7 +112,7 @@ class DriverController extends Controller
             if ($driver->status == 1) {
                 return response()->json(['driver' => $driver, 'fleet' => $fleet,'message' => 'Driver found'], 200);
             }elseif ($driver->status == 0){
-                return response()->json(['message' => 'Driver found But Your Account Suspend Please contact Authority'], 404);
+                return response()->json(['message' => 'Driver found But Your Account Suspend Please contact Authority'], 200);
             }
         }
         else {
