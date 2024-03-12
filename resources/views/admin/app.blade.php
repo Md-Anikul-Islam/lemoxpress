@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Limoe xpress</title>
+    <title>Dashboard | Limo express</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="SDMGA" name="author" />
@@ -189,7 +189,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <script>document.write(new Date().getFullYear())</script> © Limoe xpress</b>
+                        <script>document.write(new Date().getFullYear())</script> © Limo express</b>
                     </div>
                 </div>
             </div>
