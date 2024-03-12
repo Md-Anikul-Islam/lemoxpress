@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DriverController;
 use App\Http\Controllers\admin\FleetController;
 use App\Http\Controllers\admin\FleetTypeController;
+use App\Http\Controllers\admin\TollController;
 use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,11 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/coupon-update/{id}', [CouponController::class, 'update'])->name('coupon.update');
     Route::get('/coupon-delete/{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
 
+    //Toll Section
+    Route::get('/toll-section', [TollController::class, 'index'])->name('toll.section');
+    Route::post('/toll-store', [TollController::class, 'store'])->name('toll.store');
+    Route::put('/toll-update/{id}', [TollController::class, 'update'])->name('toll.update');
+    Route::get('/toll-delete/{id}', [TollController::class, 'destroy'])->name('toll.destroy');
 
     //Driver Section
     Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');

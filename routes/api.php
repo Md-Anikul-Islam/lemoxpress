@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\CouponController;
 use App\Http\Controllers\api\DriverController;
 use App\Http\Controllers\api\FleetSearchController;
+use App\Http\Controllers\api\TollController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,7 @@ Route::post('/user-history', [UserController::class, 'storeUserHistory']);
 
 //Coupon
 Route::get('/coupon', [CouponController::class, 'allCoupon']);
+
+
+//Toll
+Route::get('/toll', [TollController::class, 'allToll']);

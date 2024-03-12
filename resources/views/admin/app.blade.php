@@ -166,6 +166,13 @@
                     </a>
                 </li>
 
+                <li class="side-nav-item">
+                    <a href="{{route('toll.section')}}" class="side-nav-link">
+                        <i class="ri-dashboard-3-line"></i>
+                        <span> Toll </span>
+                    </a>
+                </li>
+
 
             </ul>
             <div class="clearfix"></div>
