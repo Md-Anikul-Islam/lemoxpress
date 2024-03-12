@@ -82,7 +82,7 @@ class DriverController extends Controller
         $driver->total_fare = $request->total_fare;
         $driver->time = $request->time;
         $driver->save();
-        return response()->json(['history' => $driver], 201);
+        return response()->json(['history' => $driver], 200);
     }
 
     public function getDriverHistory($did)
@@ -113,7 +113,7 @@ class DriverController extends Controller
             }
         }
         else {
-            return response()->json(['message' => 'No Driver found with this phone. Please register.'], 404);
+            return response()->json(['message' => 'No Driver found with this phone. Please register.'], 200);
         }
     }
 
