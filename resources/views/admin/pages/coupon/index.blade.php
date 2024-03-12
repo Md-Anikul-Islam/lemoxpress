@@ -6,12 +6,12 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Limo xpress</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Limoe xpress</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Coupon</a></li>
                         <li class="breadcrumb-item active">Coupon!</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Fleet!</h4>
+                <h4 class="page-title">Coupon!</h4>
             </div>
         </div>
     </div>
@@ -28,14 +28,6 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Code</th>
-                        <th>Type</th>
-                        <th>Discount Amount</th>
-                        <th>Valid From</th>
-                        <th>Valid To</th>
-                        <th>Max Uses</th>
-                        <th>Max Amount To Apply</th>
-                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,6 +59,7 @@
                                             <form method="post" action="{{route('coupon.update',$couponData->id)}}" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
+
                                                 <div class="row">
                                                     <div class="col-12">
 
@@ -114,9 +107,10 @@
                                                                    class="form-control" placeholder="Enter Max Amount To Apply" required>
                                                         </div>
 
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <button class="btn btn-primary" type="submit">Update</button>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-primary" type="submit">Update</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -157,7 +151,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('coupon.store')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route('fleet.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -211,6 +205,7 @@
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
+
                     </form>
                 </div>
             </div>

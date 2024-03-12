@@ -9,36 +9,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
-//    public function storeUser(Request $request)
-//    {
-//        $request->validate([
-//            'uid' => 'required',
-//            'name' => 'required|string',
-//            'email' => 'required',
-//            'phone' => 'required|string|unique:drivers',
-//            'userProfile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-//        ]);
-//
-//
-//
-//        $user = new User();
-//        $user->uid = $request->uid;
-//        $user->name = $request->name;
-//        $user->email = $request->email;
-//        $user->phone = $request->phone;
-//        $user->role = 2;
-//        if($request->userProfile){
-//            $userProfile = time().'.'.$request->userProfile->extension();
-//            $request->userProfile->move(public_path('images/userProfile'), $userProfile);
-//            $user->userProfile = $userProfile;
-//        }
-//        $user->save();
-//        return response()->json(['user' => $user], 201);
-//    }
-
-
     public function storeUser(Request $request)
     {
         $request->validate([

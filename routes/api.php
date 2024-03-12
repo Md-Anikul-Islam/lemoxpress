@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\CouponController;
 use App\Http\Controllers\api\DriverController;
 use App\Http\Controllers\api\FleetSearchController;
 use App\Http\Controllers\api\UserController;
@@ -34,3 +35,6 @@ Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHis
 Route::post('/user-register', [UserController::class, 'storeUser']);
 Route::post('/user-login', [UserController::class, 'loginUser']);
 Route::post('/user-history', [UserController::class, 'storeUserHistory']);
+
+//Coupon
+Route::get('/coupon', [CouponController::class, 'allCoupon']);
