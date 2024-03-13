@@ -13,7 +13,7 @@ class DriverController extends Controller
     public function storeDriver(Request $request)
     {
         $request->validate([
-            'did' => 'required',
+            'did' => 'required|unique:drivers',
             'name' => 'required|string',
             'email' => 'required|email|unique:drivers',
             'phone' => 'required|string|unique:drivers',
@@ -62,7 +62,7 @@ class DriverController extends Controller
         }
         $driver->save();
         $fleet = Fleet::find($request->car_id);
-        return response()->json(['driver' => $driver,'fleet' => $fleet], 200);
+        return response()->json(['driver' => $driver,'fleet' => $fleet,'message' => 'Driver Store Success'], 200);
     }
 
 
