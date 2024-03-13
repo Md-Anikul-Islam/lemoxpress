@@ -56,8 +56,9 @@ Route::middleware('auth')->group(callback: function () {
 
     //Driver Section
     Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');
-    Route::get('/driver-active/{id}', [DriverController::class, 'active'])->name('driver.active');
-    Route::get('/driver-inactive/{id}', [DriverController::class, 'inactive'])->name('driver.inactive');
+    Route::put('/driver-update/{id}', [DriverController::class, 'update'])->name('driver.update');
+//    Route::get('/driver-active/{id}', [DriverController::class, 'active'])->name('driver.active');
+//    Route::get('/driver-inactive/{id}', [DriverController::class, 'inactive'])->name('driver.inactive');
 
     //User Section
     Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');

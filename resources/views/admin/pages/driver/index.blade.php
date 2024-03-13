@@ -49,15 +49,23 @@
                             <td>
                                 <img src="{{asset('images/rta_card_font_image/'. $driverData->rta_card_font_image )}}" alt="Current Image" style="max-width: 70px;">
                             </td>
-                            <td>{{$driverData->status==1? 'Active':'Inactive'}}</td>
+                            <td>
+                                @if($driverData->status==0)
+                                    Pending
+                                @elseif($driverData->status==1)
+                                    Approved
+                                @elseif($driverData->status==2)
+                                    Suspend
+                                @endif
+                            </td>
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">History</button>
-                                    @if($driverData->status == 1)
-                                        <a href="{{route('driver.inactive',$driverData->id)}}" class="btn btn-danger">Inactive</a>
-                                    @else
-                                        <a href="{{route('driver.active',$driverData->id)}}" class="btn btn-success" >Active</a>
-                                    @endif
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">Change Status</button>
+{{--                                    @if($driverData->status == 1)--}}
+{{--                                        <a href="{{route('driver.inactive',$driverData->id)}}" class="btn btn-danger">Inactive</a>--}}
+{{--                                    @else--}}
+{{--                                        <a href="{{route('driver.active',$driverData->id)}}" class="btn btn-success" >Active</a>--}}
+{{--                                    @endif--}}
                                 </div>
 
                             </td>
@@ -66,11 +74,30 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title" id="addNewModalLabel{{$driverData->id}}">List</h4>
+                                            <h4 class="modal-title" id="addNewModalLabel{{$driverData->id}}">Status</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Test
+                                            <form method="post" action="{{route('driver.update',$driverData->id)}}" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="mb-2">
+                                                            <label for="example-select" class="form-label">Discount Type</label>
+                                                            <select name="status" class="form-select" id="example-select">
+                                                                <option value="0" {{ $driverData->status === 0 ? 'selected' : '' }}>Pending</option>
+                                                                <option value="1" {{ $driverData->status === 1 ? 'selected' : '' }}>Approved</option>
+                                                                <option value="2" {{ $driverData->status === 2 ? 'selected' : '' }}>Account Suspend</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-primary" type="submit">Update</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
