@@ -30,6 +30,7 @@ class DriverController extends Controller
         $driver->name = $request->name;
         $driver->email = $request->email;
         $driver->phone = $request->phone;
+        $driver->address = $request->address;
         $driver->status = 0;
         $driver->ratting = 0;
         if($request->profile){

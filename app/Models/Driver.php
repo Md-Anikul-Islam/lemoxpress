@@ -15,6 +15,7 @@ class Driver extends Model
         'name',
         'email',
         'phone',
+        'address',
         'profile',
         'driving_licence_font_image',
         'driving_licence_back_image',

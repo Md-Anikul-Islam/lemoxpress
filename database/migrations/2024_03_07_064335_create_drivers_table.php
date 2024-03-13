@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->string('profile')->nullable();
             $table->string('driving_licence_font_image');
             $table->string('driving_licence_back_image');
