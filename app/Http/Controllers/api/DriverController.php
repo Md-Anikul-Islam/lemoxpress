@@ -62,7 +62,7 @@ class DriverController extends Controller
         }
         $driver->save();
         $fleet = Fleet::find($request->car_id);
-        return response()->json(['driver' => $driver,'fleet' => $fleet], 201);
+        return response()->json(['driver' => $driver,'fleet' => $fleet], 200);
     }
 
 
