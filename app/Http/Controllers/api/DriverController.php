@@ -31,8 +31,8 @@ class DriverController extends Controller
         $driver->email = $request->email;
         $driver->phone = $request->phone;
         $driver->address = $request->address;
-        $driver->status = 0;
-        $driver->ratting = 0;
+        $driver->status = "0"; // Set as string
+        $driver->ratting = "0"; // Set as string
         if($request->profile){
             $profile = time().'.'.$request->profile->extension();
             $request->profile->move(public_path('images/profile'), $profile);
