@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fleets', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('car_type');
+            $table->string('car_type');
             $table->string('car_name');
             $table->string('car_model');
             $table->string('car_color')->nullable();
