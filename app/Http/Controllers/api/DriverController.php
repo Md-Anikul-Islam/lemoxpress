@@ -89,7 +89,7 @@ class DriverController extends Controller
     public function getDriverHistory($did)
     {
         try {
-            $diverHistory = DriverHistory::where('did',$did)->with('driver')->latest()->get();
+            $diverHistory = DriverHistory::where('did',$did)->with('driver','driver.car')->latest()->get();
             return response()->json(['history' => $diverHistory], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
