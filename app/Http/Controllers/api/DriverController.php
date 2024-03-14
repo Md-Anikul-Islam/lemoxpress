@@ -86,10 +86,28 @@ class DriverController extends Controller
         return response()->json(['history' => $driver], 200);
     }
 
+//    public function getDriverHistory($did)
+//    {
+//        try {
+//            $diverHistory = DriverHistory::where('did',$did)->with('driver','driver.car')->latest()->get();
+//            return response()->json(['history' => $diverHistory], 200);
+//        } catch (\Exception $e) {
+//            return response()->json(['error' => 'An error occurred while fetching data.'], 500);
+//        }
+//    }
+
     public function getDriverHistory($did)
     {
         try {
-            $diverHistory = DriverHistory::where('did',$did)->with('driver','driver.car')->latest()->get();
+            $diverHistory = DriverHistory::where('did', $did)
+                ->with(['driver' => function ($query) {
+                    $query->select('id', 'did', 'car_id', 'name', 'email', 'phone', 'address', 'profile', 'ratting', 'status');
+                }, 'driver.car' => function ($query) {
+                    $query->select('id', 'car_name', 'car_model', 'car_color', 'car_image');
+                }])
+                ->latest()
+                ->get(['id', 'did', 'origin_address', 'destination_address', 'time', 'total_fare', 'created_at', 'updated_at']);
+
             return response()->json(['history' => $diverHistory], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
