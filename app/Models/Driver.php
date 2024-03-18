@@ -24,6 +24,10 @@ class Driver extends Model
         'ratting',
         'status',
     ];
+
+    protected $casts = [
+        'car_id' => 'integer',
+    ];
     public function histories()
     {
         return $this->hasMany(DriverHistory::class, 'did', 'did');

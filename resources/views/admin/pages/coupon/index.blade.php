@@ -28,6 +28,14 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
+                        <th>Code</th>
+                        <th>Discount Type</th>
+                        <th>Discount Amount</th>
+                        <th>Valid From</th>
+                        <th>Valid To</th>
+                        <th>Max Use</th>
+                        <th>Max Order Amount</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>

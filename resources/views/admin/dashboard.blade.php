@@ -22,8 +22,8 @@
                     <div class="float-end">
                         <i class="ri-app-store-line widget-icon"></i>
                     </div>
-                    <h6 class="text-uppercase mt-0" title="Customers">Total</h6>
-                    <h2 class="my-2">100</h2>
+                    <h6 class="text-uppercase mt-0" title="Customers">Total User</h6>
+                    <h2 class="my-2">{{$totalUser}}</h2>
                 </div>
             </div>
         </div>
@@ -33,8 +33,8 @@
                     <div class="float-end">
                         <i class="ri-profile-line widget-icon"></i>
                     </div>
-                    <h6 class="text-uppercase mt-0" title="Customers">Total</h6>
-                    <h2 class="my-2">200</h2>
+                    <h6 class="text-uppercase mt-0" title="Customers">Total Driver</h6>
+                    <h2 class="my-2">{{$totalDriver}}</h2>
                 </div>
             </div>
         </div>
@@ -44,8 +44,8 @@
                     <div class="float-end">
                         <i class="ri-route-line widget-icon"></i>
                     </div>
-                    <h6 class="text-uppercase mt-0" title="Customers">Total</h6>
-                    <h2 class="my-2">300</h2>
+                    <h6 class="text-uppercase mt-0" title="Customers">Total Fleet</h6>
+                    <h2 class="my-2">{{$totalFleet}}</h2>
                 </div>
             </div>
         </div>
@@ -53,10 +53,10 @@
             <div class="card widget-flat text-bg-primary">
                 <div class="card-body">
                     <div class="float-end">
-                        <i class="ri-file-line widget-icon"></i>
+                        <i class="ri-route-line widget-icon"></i>
                     </div>
-                    <h6 class="text-uppercase mt-0" title="Customers">Total </h6>
-                    <h2 class="my-2">400</h2>
+                    <h6 class="text-uppercase mt-0" title="Customers">Total Toll</h6>
+                    <h2 class="my-2">{{$totalToll}}</h2>
                 </div>
             </div>
         </div>
