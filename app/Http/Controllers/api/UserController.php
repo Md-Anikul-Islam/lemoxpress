@@ -36,7 +36,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return response()->json(['user' => $user], 201);
+        return response()->json(['user' => $user,'message' => 'User Register Success'], 201);
     }
 
 
@@ -63,7 +63,7 @@ class UserController extends Controller
                 'updated_at' => $user->updated_at,
             ];
 
-            return response()->json(['user' => $userData], 200);
+            return response()->json(['user' => $userData,'message' => 'User Found'], 200);
         } else {
             return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
         }
