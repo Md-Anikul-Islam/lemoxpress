@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fleet;
+use App\Models\FleetType;
 use Illuminate\Http\Request;
 
 class FleetSearchController extends Controller
@@ -29,6 +30,17 @@ class FleetSearchController extends Controller
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
         }
     }
+
+    public function fleetType()
+    {
+        try {
+            $fleetType  = FleetType::latest()->get();
+            return response()->json(['fleetType' => $fleetType], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while fetching data.'], 500);
+        }
+    }
+
 
 
 
