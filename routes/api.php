@@ -32,6 +32,8 @@ Route::post('/driver-login', [DriverController::class, 'loginDriver']);
 Route::post('/drivers-history', [DriverController::class, 'storeDriverHistory']);
 Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHistory']);
 
+Route::post('/ratting-store', [DriverController::class, 'driverRatting']);
+
 //User
 Route::post('/user-register', [UserController::class, 'storeUser']);
 Route::post('/user-login', [UserController::class, 'loginUser']);

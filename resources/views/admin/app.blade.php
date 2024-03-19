@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="{{ asset('backend/css/sdmg.min.css') }}">
     <script src="{{asset('backend/js/chart.js')}}"></script>
     <script src="{{asset('backend/js/echarts.min.js')}}"></script>
-
 </head>
 
 <body>
@@ -230,6 +229,8 @@
 <script src="{{asset('backend/js/pages/datatable.init.js')}}"></script>
 <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('backend/js/app.min.js')}}"></script>
+
+
 
 </body>
 </html>

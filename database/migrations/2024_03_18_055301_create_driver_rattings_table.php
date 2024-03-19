@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('driver_rattings', function (Blueprint $table) {
             $table->id();
             $table->string('did')->nullable();
+            $table->string('uid')->nullable();
             $table->string('ratting')->nullable();
             $table->timestamps();
         });

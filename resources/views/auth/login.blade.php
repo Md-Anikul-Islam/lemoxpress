@@ -93,5 +93,10 @@
         eyeIcon.classList.toggle('ri-eye-off-fill');
     });
 </script>
+
+<!-- In your layout file or specific view -->
+
+
+
 </body>
 </html>

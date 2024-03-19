@@ -10,6 +10,7 @@ class DriverRatting extends Model
     use HasFactory;
     protected $fillable = [
         'did',
+        'uid',
         'ratting',
     ];
 }

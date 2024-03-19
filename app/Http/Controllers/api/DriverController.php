@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\DriverHistory;
+use App\Models\DriverRatting;
 use App\Models\Fleet;
 use Illuminate\Http\Request;
 
@@ -139,6 +140,39 @@ class DriverController extends Controller
         }
     }
 
+
+    public function driverRatting(Request $request)
+    {
+
+        $request->validate([
+            'did' => 'required',
+            'uid' => 'required',
+            'ratting' => 'required|numeric|min:1|max:5', // Added validation for rating range
+        ]);
+
+        // Save the rating
+        $driverRating = new DriverRatting();
+        $driverRating->did = $request->did;
+        $driverRating->uid = $request->uid;
+        $driverRating->ratting = $request->ratting;
+        $driverRating->save();
+
+        // Calculate average rating for the driver
+        $driverId = $request->did;
+        $ratings = DriverRatting::where('did', $driverId)->pluck('ratting');
+        $totalRatings = count($ratings);
+        $totalSum = $ratings->sum();
+        $averageRating = $totalRatings > 0 ? $totalSum / $totalRatings : 0;
+
+        // Update the driver's total rating in the Driver table
+        $driver = Driver::where('did', $driverId)->first();
+        if ($driver) {
+            $driver->ratting = $averageRating;
+            $driver->save();
+        }
+
+        return response()->json(['ratting' => $averageRating], 200);
+    }
 
 
 
