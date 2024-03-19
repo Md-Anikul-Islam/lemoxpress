@@ -22,30 +22,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::get('/fleet', [FleetSearchController::class, 'allFleet']);
 Route::get('/fleet-search/{fleet_type}', [FleetSearchController::class, 'search']);
-
 //Fleet Type
 Route::get('/fleet-type', [FleetSearchController::class, 'fleetType']);
-
 //Driver
 Route::post('/drivers', [DriverController::class, 'storeDriver']);
 Route::post('/driver-login', [DriverController::class, 'loginDriver']);
 Route::post('/drivers-history', [DriverController::class, 'storeDriverHistory']);
 Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHistory']);
-
 //Driver Ratting
 Route::post('/ratting-store', [DriverController::class, 'driverRatting']);
-
 //User
 Route::post('/user-register', [UserController::class, 'storeUser']);
 Route::post('/user-login', [UserController::class, 'loginUser']);
 Route::post('/user-history', [UserController::class, 'storeUserHistory']);
-
 //Coupon
 Route::get('/coupon', [CouponController::class, 'allCoupon']);
-
-
 //Toll
 Route::get('/toll', [TollController::class, 'allToll']);
