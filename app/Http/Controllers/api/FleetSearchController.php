@@ -34,12 +34,13 @@ class FleetSearchController extends Controller
     public function fleetType()
     {
         try {
-            $fleetType  = FleetType::latest()->get();
-            return response()->json(['fleetType' => $fleetType], 200);
+            $fleetTypes  = FleetType::pluck('name')->toArray();
+            return response()->json($fleetTypes, 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
         }
     }
+
 
 
 
