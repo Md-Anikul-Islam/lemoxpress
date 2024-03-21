@@ -9,7 +9,7 @@ class Fleet extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'car_type',
+        'car_type_id',
         'car_name',
         'car_model',
         'car_color',
@@ -21,6 +21,6 @@ class Fleet extends Model
 
     public function fleetType()
     {
-        return $this->belongsTo(FleetType::class,'car_type');
+        return $this->belongsTo(FleetType::class, 'car_type_id');
     }
 }

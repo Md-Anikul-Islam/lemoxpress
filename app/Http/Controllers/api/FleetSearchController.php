@@ -14,8 +14,8 @@ class FleetSearchController extends Controller
     {
         try {
             $fleet = Fleet::with('fleetType')->latest()->get()->map(function ($item) {
-                // Cast car_type to integer
-                $item['car_type'] = (int) $item['car_type'];
+                $item['fleet_type'] = $item->fleetType->name; // Embedding fleet_type name directly
+                unset($item->fleetType); // Removing fleetType object from the item
                 return $item;
             });
 
