@@ -13,12 +13,18 @@ class FleetSearchController extends Controller
     public function allFleet()
     {
         try {
-            $fleet  = Fleet::with('fleetType')->latest()->get();
+            $fleet = Fleet::with('fleetType')->latest()->get()->map(function ($item) {
+                // Cast car_type to integer
+                $item['car_type'] = (int) $item['car_type'];
+                return $item;
+            });
+
             return response()->json(['fleet' => $fleet], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while fetching data.'], 500);
         }
     }
+
 
 
     public function search(Request $request, $fleet_type)
