@@ -15,6 +15,7 @@ class Coupon extends Model
         'valid_from',
         'valid_to',
         'max_uses',
-        'max_amount_to_apply'
+        'max_amount_to_apply',
+        'short_note'
     ];
 }

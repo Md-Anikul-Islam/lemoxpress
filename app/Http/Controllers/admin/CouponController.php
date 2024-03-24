@@ -34,6 +34,8 @@ class CouponController extends Controller
             $coupon->valid_to = $request->valid_to;
             $coupon->max_uses = $request->max_uses;
             $coupon->max_amount_to_apply = $request->max_amount_to_apply;
+            $coupon->short_note = $request->short_note;
+
             $coupon->save();
             Toastr::success('Coupon Added Successfully', 'Success');
             return redirect()->back();
@@ -65,6 +67,7 @@ class CouponController extends Controller
             $coupon->valid_to = Carbon::parse($request->valid_to)->format('Y-m-d H:i:s'); // Convert to MySQL datetime format
             $coupon->max_uses = $request->max_uses;
             $coupon->max_amount_to_apply = $request->max_amount_to_apply;
+            $coupon->short_note = $request->short_note;
             $coupon->save();
             Toastr::success('Coupon Updated Successfully', 'Success');
             return redirect()->back();

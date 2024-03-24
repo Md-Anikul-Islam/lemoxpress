@@ -35,6 +35,7 @@
                         <th>Valid To</th>
                         <th>Max Use</th>
                         <th>Max Order Amount</th>
+                        <th>Short Note</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -49,6 +50,7 @@
                             <td>{{ \Carbon\Carbon::parse($couponData->valid_to)->format('d M Y') }}</td>
                             <td>{{$couponData->max_uses}}</td>
                             <td>{{$couponData->max_amount_to_apply}}</td>
+                            <td>{{$couponData->short_note}}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex justify-content-end gap-1">
                                     <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$couponData->id}}">Edit</button>
@@ -114,6 +116,13 @@
                                                             <input type="number" id="max_amount_to_apply" name="max_amount_to_apply" value="{{$couponData->max_amount_to_apply}}"
                                                                    class="form-control" placeholder="Enter Max Amount To Apply" required>
                                                         </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="short_note" class="form-label">Short Note</label>
+                                                            <input type="text" id="short_note" name="short_note" value="{{$couponData->short_note}}"
+                                                                   class="form-control" placeholder="EnterShort Note">
+                                                        </div>
+
 
                                                     </div>
                                                     <div class="d-flex justify-content-end">
@@ -208,6 +217,13 @@
                                     <input type="number" id="max_amount_to_apply" name="max_amount_to_apply"
                                            class="form-control" placeholder="Enter Max Amount To Apply" required>
                                 </div>
+
+                                <div class="mb-2">
+                                    <label for="short_note" class="form-label">Short Note</label>
+                                    <input type="text" id="short_note" name="short_note"
+                                           class="form-control" placeholder="EnterShort Note">
+                                </div>
+
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('valid_to');
             $table->integer('max_uses')->nullable();
             $table->string('max_amount_to_apply')->nullable();
+            $table->text('short_note')->nullable();
             $table->timestamps();
         });
     }
