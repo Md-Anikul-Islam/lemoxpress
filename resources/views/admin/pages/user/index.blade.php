@@ -22,7 +22,7 @@
             justify-content: center;
         }
         .table_header_style_one p {
-            font-size: 12px;
+            font-size: 15px;
         }
         .table_header_style_one p:last-child,
         .table_header_style_tow p:last-child {
@@ -80,7 +80,7 @@
                             </td>
                             <!--Edit Modal -->
                             <div class="modal fade" id="editNewModalId{{$userData->id}}" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editNewModalLabel{{$userData->id}}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="addNewModalLabel{{$userData->id}}">User History</h4>
