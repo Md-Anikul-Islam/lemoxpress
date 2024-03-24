@@ -17,6 +17,6 @@ class DriverHistory extends Model
     ];
     public function driver()
     {
-        return $this->belongsTo(Driver::class, 'did', 'did');
+        return $this->belongsTo(Driver::class);
     }
 }

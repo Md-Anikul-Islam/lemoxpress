@@ -1,6 +1,35 @@
 @extends('admin.app')
 @section('admin_content')
     {{-- CKEditor CDN --}}
+    <style>
+        .table_header_style_one,
+        .table_header_style_tow{
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            align-items: center;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .table_header_style_tow {
+            border-top: none;
+        }
+        .table_header_style_one p, .table_header_style_tow p {
+            border-right: 1px solid #ddd;
+            height: 100%;
+            margin-bottom: 0px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .table_header_style_one p {
+            font-size: 12px;
+        }
+        .table_header_style_one p:last-child,
+        .table_header_style_tow p:last-child {
+            border-right: none;
+        }
+    </style>
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -61,11 +90,7 @@
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">Change Status</button>
-{{--                                    @if($driverData->status == 1)--}}
-{{--                                        <a href="{{route('driver.inactive',$driverData->id)}}" class="btn btn-danger">Inactive</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{route('driver.active',$driverData->id)}}" class="btn btn-success" >Active</a>--}}
-{{--                                    @endif--}}
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#driverNewModalId{{$driverData->id}}">History</button>
                                 </div>
 
                             </td>
@@ -98,6 +123,47 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Edit Modal -->
+                            <div class="modal fade" id="driverNewModalId{{$driverData->id}}" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="driverNewModalId{{$driverData->id}}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="addNewModalLabel{{$driverData->id}}">Driver History</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <div class="table_header_style_one">
+                                                    <p>S/N</p>
+                                                    <p>DID</p>
+                                                    <p>Origin Address</p>
+                                                    <p>Destination Address</p>
+                                                    <p>Time</p>
+                                                    <p>Fare</p>
+                                                </div>
+                                                <div>
+                                                    @if($driverData->driverHistory->count()>0)
+                                                        @foreach($driverData->driverHistory as $key=>$historyData)
+                                                            <div class="table_header_style_tow">
+                                                                <p>{{$key+1}}</p>
+                                                                <p>{{$historyData->did}}</p>
+                                                                <p>{{$historyData->origin_address}}</p>
+                                                                <p>{{$historyData->destination_address}}</p>
+                                                                <p>{{$historyData->time}}</p>
+                                                                <p>{{$historyData->total_fare}}</p>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        No History Found
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

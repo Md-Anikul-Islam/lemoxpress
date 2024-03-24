@@ -28,7 +28,7 @@ class Driver extends Model
     protected $casts = [
         'car_id' => 'integer',
     ];
-    public function histories()
+    public function driverHistory()
     {
         return $this->hasMany(DriverHistory::class, 'did', 'did');
     }

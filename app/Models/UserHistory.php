@@ -15,4 +15,8 @@ class UserHistory extends Model
         'time',
         'total_fare',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -8,7 +8,7 @@ class DriverController extends Controller
 {
     public function driverList()
     {
-        $driver = Driver::with('histories')->latest()->get();
+        $driver = Driver::with('driverHistory')->latest()->get();
         return view('admin.pages.driver.index',compact('driver'));
     }
 

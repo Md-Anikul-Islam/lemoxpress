@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function userList()
     {
-        $user = User::where('role',2)->latest()->get();
+        $user = User::where('role',2)->with('userHistory')->latest()->get();
         return view('admin.pages.user.index',compact('user'));
     }
 }
