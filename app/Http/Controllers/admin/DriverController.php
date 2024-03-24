@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
+use App\Models\DriverHistory;
 use Illuminate\Http\Request;
 use Toastr;
 class DriverController extends Controller
@@ -10,6 +11,12 @@ class DriverController extends Controller
     {
         $driver = Driver::with('driverHistory')->latest()->get();
         return view('admin.pages.driver.index',compact('driver'));
+    }
+
+    public function driverHistpry($id)
+    {
+        $driverHistpry = DriverHistory::where('did',$id)->latest()->get();
+        return view('admin.pages.driver.history',compact('driverHistpry'));
     }
 
 

@@ -57,10 +57,10 @@ Route::middleware('auth')->group(callback: function () {
     //Driver Section
     Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');
     Route::put('/driver-update/{id}', [DriverController::class, 'update'])->name('driver.update');
-//    Route::get('/driver-active/{id}', [DriverController::class, 'active'])->name('driver.active');
-//    Route::get('/driver-inactive/{id}', [DriverController::class, 'inactive'])->name('driver.inactive');
+    Route::get('/driver-history/{id}', [DriverController::class, 'driverHistpry'])->name('driver.history');
 
     //User Section
     Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');
+    Route::get('/user-history/{id}', [UserController::class, 'userHistpry'])->name('user.history');
 });
 require __DIR__.'/auth.php';
