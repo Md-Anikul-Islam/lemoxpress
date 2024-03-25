@@ -39,5 +39,6 @@ Route::post('/user-login', [UserController::class, 'loginUser']);
 Route::post('/user-history', [UserController::class, 'storeUserHistory']);
 //Coupon
 Route::get('/coupon', [CouponController::class, 'allCoupon']);
+Route::post('/apply-coupon', [CouponController::class,'applyCoupon']);
 //Toll
 Route::get('/toll', [TollController::class, 'allToll']);
