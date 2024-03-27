@@ -36,7 +36,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return response()->json(['user' => $user,'message' => 'User Register Success'], 201);
+        return response()->json(['user' => $user,'message' => 'User Register Success'], 200);
     }
 
 
