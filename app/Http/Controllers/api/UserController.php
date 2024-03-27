@@ -110,7 +110,7 @@ class UserController extends Controller
 
 
 
-        return response()->json(['history' => $user], 201);
+        return response()->json(['history' => $user], 200);
     }
 
 
