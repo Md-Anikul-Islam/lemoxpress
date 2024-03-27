@@ -15,7 +15,6 @@ class UserController extends Controller
         $request->validate([
             'uid' => 'required',
             'name' => 'required|string',
-            'userProfile' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         // Check if at least one of phone or email is filled
