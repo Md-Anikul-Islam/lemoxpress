@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('coupon_id')->nullable();
             $table->integer('user_id')->nullable();
+            $table->tinyInteger('apply_status')->default(0);
             $table->timestamps();
         });
     }

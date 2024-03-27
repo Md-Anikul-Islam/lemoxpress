@@ -40,9 +40,10 @@ class CouponController extends Controller
             return response()->json(['message' => 'Coupon has expired'], 400);
         }
         // Check if the user has reached the maximum usage limit for the coupon
-        $userCouponCount = CouponUser::where('coupon_id', $coupon->id)
+        $userCouponCount = CouponUser::where('coupon_id', $coupon->id)->where('apply_status', 1)
             ->where('user_id', $userId)
             ->count();
+
         if ($userCouponCount >= $coupon->max_uses) {
             return response()->json(['message' => 'Coupon not valid for you'], 400);
         }else{

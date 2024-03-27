@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CouponUser;
 use App\Models\User;
 use App\Models\UserHistory;
 use Illuminate\Http\Request;
@@ -63,6 +64,9 @@ class UserController extends Controller
                 'updated_at' => $user->updated_at,
             ];
 
+
+
+
             return response()->json(['user' => $userData,'message' => 'User Found'], 200);
         } else {
             return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
@@ -72,21 +76,40 @@ class UserController extends Controller
 
     public function storeUserHistory(Request $request)
     {
+
         $request->validate([
             'uid' => 'required',
+            'user_id' => 'required',
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
             'total_fare' => 'required',
         ]);
-        $driver = new UserHistory();
-        $driver->uid = $request->uid;
-        $driver->origin_address = $request->origin_address;
-        $driver->destination_address = $request->destination_address;
-        $driver->total_fare = $request->total_fare;
-        $driver->time = $request->time;
-        $driver->save();
-        return response()->json(['history' => $driver], 201);
+
+
+        $user = new UserHistory();
+        $user->uid = $request->uid;
+        $user->user_id= $request->user_id;
+        $user->origin_address = $request->origin_address;
+        $user->destination_address = $request->destination_address;
+        $user->total_fare = $request->total_fare;
+        $user->time = $request->time;
+        $user->save();
+
+        // Update apply_status for the latest created CouponUser entry for the same user_id
+        $latestCouponUser = CouponUser::where('user_id', $request->user_id)
+            ->latest('created_at')
+            ->first();
+
+        //dd($latestCouponUser);
+
+        if ($latestCouponUser) {
+            $latestCouponUser->update(['apply_status' => 1]);
+        }
+
+
+
+        return response()->json(['history' => $user], 201);
     }
 
 

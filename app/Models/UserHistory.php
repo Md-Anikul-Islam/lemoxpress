@@ -10,6 +10,8 @@ class UserHistory extends Model
     use HasFactory;
     protected $fillable = [
         'uid',
+        'user_id',
+        'driver_id',
         'origin_address',
         'destination_address',
         'time',

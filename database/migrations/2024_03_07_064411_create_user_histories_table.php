@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('user_histories', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
+            $table->integer('user_id')->nullable();
+            $table->integer('driver_id')->nullable();
             $table->string('origin_address');
             $table->string('destination_address');
             $table->string('time');
