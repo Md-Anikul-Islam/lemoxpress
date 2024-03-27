@@ -80,6 +80,7 @@ class UserController extends Controller
         $request->validate([
             'uid' => 'required',
             'user_id' => 'required',
+            'driver_id' => 'required',
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
@@ -90,6 +91,7 @@ class UserController extends Controller
         $user = new UserHistory();
         $user->uid = $request->uid;
         $user->user_id= $request->user_id;
+        $user->driver_id= $request->driver_id;
         $user->origin_address = $request->origin_address;
         $user->destination_address = $request->destination_address;
         $user->total_fare = $request->total_fare;
