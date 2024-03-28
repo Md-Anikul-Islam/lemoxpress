@@ -7,17 +7,21 @@ use App\Models\CouponUser;
 use App\Models\User;
 use App\Models\UserHistory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     public function storeUser(Request $request)
     {
-        $request->validate([
-            'uid' => 'required|unique:users',
-            'name' => 'required|string',
-            'phone' => 'required|unique:users',
-        ]);
-
+        try {
+            $request->validate([
+                'uid' => 'required|unique:users',
+                'name' => 'required|string',
+                'phone' => 'required|unique:users',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json(['message' => $e->getMessage(), 'errors' => $e->errors()], 200);
+        }
         // Check if at least one of phone or email is filled
         if (empty($request->phone) && empty($request->email)) {
             return response()->json(['error' => 'Either phone or email must be filled.'], 200);
