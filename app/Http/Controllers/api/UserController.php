@@ -26,6 +26,7 @@ class UserController extends Controller
         if (empty($request->phone) && empty($request->email)) {
             return response()->json(['error' => 'Either phone or email must be filled.'], 200);
         }
+
         $user = new User();
         $user->uid = $request->uid;
         $user->name = $request->name;
@@ -46,11 +47,33 @@ class UserController extends Controller
 
     public function loginUser(Request $request)
     {
+//        $request->validate([
+//            'phone' => 'nullable',
+//            'email' => 'nullable',
+//        ], [
+//            'phone.required_without' => 'Please provide either phone or email.',
+//            'email.required_without' => 'Please provide either phone or email.',
+//        ]);
+//
+//        // Check if both phone and email are not provided
+//        if (!$request->filled('phone') && !$request->filled('email')) {
+//            return response()->json(['message' => 'Please provide either phone or email.'], 200);
+//        }
+
         $request->validate([
-            'phone' => 'required',
+            'credential' => 'required', // Change 'phone' to 'identifier'
+
         ]);
 
-        $user = User::where('phone', $request->phone)->first();
+        $user = User::where('phone', $request->credential)
+            ->orWhere('email', $request->credential)
+            ->first();
+
+       // $user = User::where('phone', $request->phone)->first();
+
+
+
+
 
         if ($user) {
             // Selecting specific fields from the user object
