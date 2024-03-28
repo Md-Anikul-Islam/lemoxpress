@@ -13,13 +13,14 @@ class UserController extends Controller
     public function storeUser(Request $request)
     {
         $request->validate([
-            'uid' => 'required',
+            'uid' => 'required|unique:users',
             'name' => 'required|string',
+            'phone' => 'required|unique:users',
         ]);
 
         // Check if at least one of phone or email is filled
         if (empty($request->phone) && empty($request->email)) {
-            return response()->json(['error' => 'Either phone or email must be filled.'], 422);
+            return response()->json(['error' => 'Either phone or email must be filled.'], 200);
         }
 
         $user = new User();
@@ -68,7 +69,7 @@ class UserController extends Controller
 
             return response()->json(['user' => $userData,'message' => 'User Found'], 200);
         } else {
-            return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 404);
+            return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 200);
         }
     }
 
