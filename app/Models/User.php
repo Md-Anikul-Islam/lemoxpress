@@ -25,7 +25,10 @@ class User extends Authenticatable
         'userProfile',
         'password',
         'role',
+        'phone_verification',
     ];
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,6 +48,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'phone_verification' => 'integer',
     ];
     public function userHistory()
     {

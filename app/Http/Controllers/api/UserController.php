@@ -26,20 +26,18 @@ class UserController extends Controller
         if (empty($request->phone) && empty($request->email)) {
             return response()->json(['error' => 'Either phone or email must be filled.'], 200);
         }
-
         $user = new User();
         $user->uid = $request->uid;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->phone_verification = $request->phone_verification??0;
         $user->role = 2;
-
         if ($request->userProfile) {
             $userProfile = time().'.'.$request->userProfile->extension();
             $request->userProfile->move(public_path('images/userProfile'), $userProfile);
             $user->userProfile = $userProfile;
         }
-
         $user->save();
         return response()->json(['user' => $user,'message' => 'User Register Success'], 200);
     }
@@ -64,6 +62,7 @@ class UserController extends Controller
                 'phone' => $user->phone,
                 'role' => (int)$user->role,
                 'userProfile' => $user->userProfile,
+                'phoneVerification' => $user->phone_verification,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ];
