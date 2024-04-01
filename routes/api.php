@@ -37,6 +37,7 @@ Route::post('/ratting-store', [DriverController::class, 'driverRatting']);
 Route::post('/user-register', [UserController::class, 'storeUser']);
 Route::post('/user-login', [UserController::class, 'loginUser']);
 Route::post('/user-history', [UserController::class, 'storeUserHistory']);
+Route::get('/get-user-history/{uid}', [UserController::class, 'getUserHistory']);
 //Coupon
 Route::get('/coupon', [CouponController::class, 'allCoupon']);
 Route::post('/apply-coupon', [CouponController::class,'applyCoupon']);

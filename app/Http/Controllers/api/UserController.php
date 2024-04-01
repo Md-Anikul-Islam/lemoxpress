@@ -91,10 +91,6 @@ class UserController extends Controller
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ];
-
-
-
-
             return response()->json(['user' => $userData,'message' => 'User Found'], 200);
         } else {
             return response()->json(['message' => 'No user found with this UID and phone. Please register.'], 200);
@@ -104,7 +100,6 @@ class UserController extends Controller
 
     public function storeUserHistory(Request $request)
     {
-
         $request->validate([
             'uid' => 'required',
             'user_id' => 'required',
@@ -114,8 +109,6 @@ class UserController extends Controller
             'time' => 'required',
             'total_fare' => 'required',
         ]);
-
-
         $user = new UserHistory();
         $user->uid = $request->uid;
         $user->user_id= $request->user_id;
@@ -125,21 +118,22 @@ class UserController extends Controller
         $user->total_fare = $request->total_fare;
         $user->time = $request->time;
         $user->save();
-
         // Update apply_status for the latest created CouponUser entry for the same user_id
         $latestCouponUser = CouponUser::where('user_id', $request->user_id)
             ->latest('created_at')
             ->first();
-
         //dd($latestCouponUser);
-
         if ($latestCouponUser) {
             $latestCouponUser->update(['apply_status' => 1]);
         }
-
-
-
         return response()->json(['history' => $user], 200);
+    }
+
+
+    public function getUserHistory($id)
+    {
+        $userHistory = UserHistory::where('uid',$id)->latest()->get();
+        return response()->json(['userHistory' => $userHistory], 200);
     }
 
 
