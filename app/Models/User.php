@@ -26,6 +26,7 @@ class User extends Authenticatable
         'password',
         'role',
         'phone_verification',
+        'profileLink',
     ];
 
 

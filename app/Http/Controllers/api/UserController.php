@@ -33,6 +33,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->phone_verification = $request->phone_verification??0;
+        $user->profileLink = $request->profileLink??null;
         $user->role = 2;
         if ($request->userProfile) {
             $userProfile = time().'.'.$request->userProfile->extension();
@@ -86,6 +87,7 @@ class UserController extends Controller
                 'role' => (int)$user->role,
                 'userProfile' => $user->userProfile,
                 'phoneVerification' => $user->phone_verification,
+                'profileLink' => $user->profileLink,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ];

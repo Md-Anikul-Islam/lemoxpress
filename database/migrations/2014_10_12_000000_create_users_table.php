@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('password')->nullable();
             $table->integer('phone_verification')->default(0);
+            $table->string('profileLink')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
