@@ -122,8 +122,14 @@ class DriverController extends Controller
         ]);
 
         $driver = Driver::where('phone', $request->phone)->first();
+//        if($driver){
+//            $fleet = Fleet::find($driver->car_id);
+//        }
+
         if($driver){
-            $fleet = Fleet::find($driver->car_id);
+            $fleet = Fleet::with('fleetType')->find($driver->car_id);
+            $fleet->car_type = $fleet->fleetType->name; // Add car_type to the fleet object
+            unset($fleet->fleetType); // Remove fleetType object from fleet
         }
         if($driver){
             if ($driver->status == 1) {
