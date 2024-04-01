@@ -63,7 +63,19 @@ class DriverController extends Controller
             $driver->rta_card_back_image = $rta_card_back_image;
         }
         $driver->save();
-        $fleet = Fleet::find($request->car_id);
+
+
+       // $fleet = Fleet::find($request->car_id);
+
+        if($driver){
+            $fleet = Fleet::with('fleetType')->find($driver->car_id);
+            $fleet->car_type = $fleet->fleetType->name; // Add car_type to the fleet object
+            unset($fleet->fleetType); // Remove fleetType object from fleet
+        }
+
+
+
+
         return response()->json(['driver' => $driver,'fleet' => $fleet,'message' => 'Driver Store Success'], 200);
     }
 
