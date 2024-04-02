@@ -103,7 +103,7 @@ class UserController extends Controller
         $request->validate([
             'uid' => 'required',
             'user_id' => 'required',
-            'driver_id' => 'required',
+            'did' => 'required',
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
@@ -112,7 +112,7 @@ class UserController extends Controller
         $user = new UserHistory();
         $user->uid = $request->uid;
         $user->user_id= $request->user_id;
-        $user->driver_id= $request->driver_id;
+        $user->did= $request->did;
         $user->origin_address = $request->origin_address;
         $user->destination_address = $request->destination_address;
         $user->total_fare = $request->total_fare;
@@ -132,7 +132,7 @@ class UserController extends Controller
 
     public function getUserHistory($id)
     {
-        $userHistory = UserHistory::where('uid',$id)->latest()->get();
+        $userHistory = UserHistory::where('uid',$id)->with('driver','driver.car')->latest()->get();
         return response()->json(['userHistory' => $userHistory], 200);
     }
 

@@ -33,6 +33,8 @@ class Driver extends Model
         return $this->hasMany(DriverHistory::class, 'did', 'did');
     }
 
+
+
     public function car()
     {
         return $this->belongsTo(Fleet::class, 'car_id');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('uid');
             $table->integer('user_id')->nullable();
-            $table->integer('driver_id')->nullable();
+            $table->integer('did')->nullable();
             $table->string('origin_address');
             $table->string('destination_address');
             $table->string('time');

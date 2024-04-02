@@ -11,7 +11,7 @@ class UserHistory extends Model
     protected $fillable = [
         'uid',
         'user_id',
-        'driver_id',
+        'did',
         'origin_address',
         'destination_address',
         'time',
@@ -20,5 +20,10 @@ class UserHistory extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class, 'did', 'did');
     }
 }
