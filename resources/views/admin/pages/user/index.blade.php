@@ -27,7 +27,6 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Profile</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -42,7 +41,6 @@
                             <td>
                                 <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="max-width: 70px;">
                             </td>
-                            <td>{{$userData->status==1? 'Active':'Inactive'}}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
                                     <a href="{{route('user.history',$userData->uid)}}"class="btn btn-info">History</a>
