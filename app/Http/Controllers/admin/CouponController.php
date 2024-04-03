@@ -26,6 +26,7 @@ class CouponController extends Controller
                 'max_uses' => 'nullable|integer|min:1',
             ]);
 
+
             $coupon = new Coupon();
             $coupon->code = $request->code;
             $coupon->discount_type = $request->discount_type;
