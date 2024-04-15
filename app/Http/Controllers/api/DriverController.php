@@ -7,6 +7,7 @@ use App\Models\Driver;
 use App\Models\DriverHistory;
 use App\Models\DriverRatting;
 use App\Models\Fleet;
+use App\Models\TripRequest;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -190,6 +191,28 @@ class DriverController extends Controller
         }
 
         return response()->json(['ratting' => $averageRating], 200);
+    }
+
+
+    public function storeDriverManuallyTrip(Request $request)
+    {
+        $request->validate([
+            'driver_id' => 'required',
+            'fleet_id' => 'required',
+            'origin_address' => 'required',
+            'destination_address' => 'required',
+            'time' => 'required',
+            'total_fare' => 'required',
+        ]);
+        $tripRequest = new TripRequest();
+        $tripRequest->driver_id = $request->driver_id;
+        $tripRequest->fleet_id = $request->fleet_id;
+        $tripRequest->origin_address = $request->origin_address;
+        $tripRequest->destination_address = $request->destination_address;
+        $tripRequest->total_fare = $request->total_fare;
+        $tripRequest->time = $request->time;
+        $tripRequest->save();
+        return response()->json(['tripRequest' => $tripRequest], 200);
     }
 
 
