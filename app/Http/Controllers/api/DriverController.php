@@ -198,8 +198,8 @@ class DriverController extends Controller
     {
         $request->validate([
             'driver_id' => 'required',
-            'customer_name' => 'required',
-            'customer_phone' => 'required',
+            'passenger_name' => 'required',
+            'passenger_phone' => 'required',
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
@@ -207,8 +207,8 @@ class DriverController extends Controller
         ]);
         $tripRequest = new TripRequest();
         $tripRequest->driver_id = $request->driver_id;
-        $tripRequest->customer_name = $request->customer_name;
-        $tripRequest->customer_phone = $request->customer_phone;
+        $tripRequest->passenger_name = $request->passenger_name;
+        $tripRequest->passenger_phone = $request->passenger_phone;
         $tripRequest->origin_address = $request->origin_address;
         $tripRequest->destination_address = $request->destination_address;
         $tripRequest->total_fare = $request->total_fare;

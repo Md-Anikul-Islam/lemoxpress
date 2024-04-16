@@ -10,8 +10,8 @@ class TripRequest extends Model
     use HasFactory;
     protected $fillable = [
         'driver_id',
-        'customer_name',
-        'customer_phone',
+        'passenger_name',
+        'passenger_phone',
         'origin_address',
         'destination_address',
         'time',

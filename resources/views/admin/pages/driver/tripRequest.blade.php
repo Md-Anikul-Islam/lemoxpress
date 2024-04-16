@@ -22,8 +22,8 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
+                        <th>Passenger Name</th>
+                        <th>Passenger Phone</th>
                         <th>Origin Address</th>
                         <th>Destination Address</th>
                         <th>Time</th>
@@ -34,8 +34,8 @@
                     @foreach($tripHistory as $key=>$tripHistoryData)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$tripHistoryData->customer_name}}</td>
-                            <td>{{$tripHistoryData->customer_phone}}</td>
+                            <td>{{$tripHistoryData->passenger_name}}</td>
+                            <td>{{$tripHistoryData->passenger_phone}}</td>
                             <td>{{$tripHistoryData->origin_address}}</td>
                             <td>{{$tripHistoryData->destination_address}}</td>
                             <td>{{$tripHistoryData->time}}</td>
