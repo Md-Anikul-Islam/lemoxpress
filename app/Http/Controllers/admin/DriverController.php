@@ -3,6 +3,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\DriverHistory;
+use App\Models\TripRequest;
 use Illuminate\Http\Request;
 use Toastr;
 class DriverController extends Controller
@@ -20,13 +21,22 @@ class DriverController extends Controller
     }
 
 
+    public function driverTripHistory($id)
+    {
+        $tripHistory = TripRequest::where('driver_id',$id)->latest()->get();
+        return view('admin.pages.driver.tripRequest',compact('tripHistory'));
+    }
+
+
     public function update(Request $request, $id)
     {
+
         try {
             $driver = Driver::findOrFail($id);
             $request->validate([
                 'status' => 'required',
             ]);
+
             $driver->status = (int)$request->status;
             $driver->save();
             Toastr::success('Driver Status Updated Successfully', 'Success');

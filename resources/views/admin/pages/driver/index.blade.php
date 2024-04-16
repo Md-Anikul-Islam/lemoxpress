@@ -61,6 +61,7 @@
                                 <div class="d-flex  gap-1">
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">Change Status</button>
                                     <a href="{{route('driver.history',$driverData->did)}}"class="btn btn-info">History</a>
+                                    <a href="{{route('driver.trip.history',$driverData->did)}}"class="btn btn-info">Trip</a>
                                 </div>
 
                             </td>
@@ -73,14 +74,14 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="{{route('driver.update',$driverData->did)}}" enctype="multipart/form-data">
+                                            <form method="post" action="{{route('driver.update',$driverData->id)}}" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
 
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="mb-2">
-                                                            <label for="example-select" class="form-label">Discount Type</label>
+                                                            <label for="example-select" class="form-label">Status</label>
                                                             <select name="status" class="form-select" id="example-select">
                                                                 <option value="0" {{ $driverData->status === 0 ? 'selected' : '' }}>Pending</option>
                                                                 <option value="1" {{ $driverData->status === 1 ? 'selected' : '' }}>Approved</option>
