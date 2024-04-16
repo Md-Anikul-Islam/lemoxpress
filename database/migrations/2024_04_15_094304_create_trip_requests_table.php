@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('trip_requests', function (Blueprint $table) {
             $table->id();
             $table->string('driver_id');
-            $table->integer('fleet_id');
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->string('origin_address');

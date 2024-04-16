@@ -10,7 +10,6 @@ class TripRequest extends Model
     use HasFactory;
     protected $fillable = [
         'driver_id',
-        'fleet_id',
         'customer_name',
         'customer_phone',
         'origin_address',
@@ -24,8 +23,4 @@ class TripRequest extends Model
         return $this->belongsTo(Driver::class, 'driver_id', 'did');
     }
 
-    public function fleet()
-    {
-        return $this->belongsTo(Fleet::class);
-    }
 }
