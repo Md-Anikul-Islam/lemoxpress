@@ -199,6 +199,8 @@ class DriverController extends Controller
         $request->validate([
             'driver_id' => 'required',
             'fleet_id' => 'required',
+            'customer_name' => 'required',
+            'customer_phone' => 'required',
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
@@ -207,12 +209,26 @@ class DriverController extends Controller
         $tripRequest = new TripRequest();
         $tripRequest->driver_id = $request->driver_id;
         $tripRequest->fleet_id = $request->fleet_id;
+        $tripRequest->customer_name = $request->customer_name;
+        $tripRequest->customer_phone = $request->customer_phone;
         $tripRequest->origin_address = $request->origin_address;
         $tripRequest->destination_address = $request->destination_address;
         $tripRequest->total_fare = $request->total_fare;
         $tripRequest->time = $request->time;
         $tripRequest->save();
         return response()->json(['tripRequest' => $tripRequest], 200);
+    }
+
+    public function manualTripList()
+    {
+        $tripRequest = TripRequest::with('driver','fleet')->latest()->get();
+        return response()->json(['manualTripList' => $tripRequest], 200);
+    }
+
+    public function manualSpecificTrip($id)
+    {
+        $tripRequest = TripRequest::where('id',$id)->with('driver','fleet')->find($id);
+        return response()->json(['manualSpecificTrip' => $tripRequest], 200);
     }
 
 

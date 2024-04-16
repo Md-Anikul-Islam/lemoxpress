@@ -11,9 +11,21 @@ class TripRequest extends Model
     protected $fillable = [
         'driver_id',
         'fleet_id',
+        'customer_name',
+        'customer_phone',
         'origin_address',
         'destination_address',
         'time',
         'total_fare',
     ];
+
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class, 'driver_id', 'did');
+    }
+
+    public function fleet()
+    {
+        return $this->belongsTo(Fleet::class);
+    }
 }

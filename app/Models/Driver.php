@@ -39,4 +39,9 @@ class Driver extends Model
     {
         return $this->belongsTo(Fleet::class, 'car_id');
     }
+
+    public function tripRequest()
+    {
+        return $this->hasMany(TripRequest::class, 'driver_id');
+    }
 }
