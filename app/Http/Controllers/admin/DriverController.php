@@ -46,4 +46,11 @@ class DriverController extends Controller
         }
     }
 
+    public function driverSpecificTripHistory($id)
+    {
+        $tripHistory = TripRequest::where('driver_id',$id)->latest()->get();
+        dd($tripHistory);
+        return view('admin.pages.driver.tripRequest',compact('tripHistory'));
+    }
+
 }

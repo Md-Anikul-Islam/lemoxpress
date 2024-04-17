@@ -225,12 +225,19 @@ class DriverController extends Controller
 
     public function manualTripList()
     {
-        $baseUrl = '127.0.0.1:8000'; // Your dynamic base URL
+        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
         $tripRequest = TripRequest::with('driver','driver.car')->latest()->get();
 
         // Append link to each trip request
+//        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
+//            $request->link = $baseUrl . '/get-specific-trip/' . $request->id;
+//            return $request;
+//        });
+
+        // Append encrypted link to each trip request
         $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
-            $request->link = $baseUrl . '/get-specific-trip/' . $request->id;
+            $encryptedId = encrypt($request->id); // Encrypting the ID
+            $request->link = $baseUrl . '/get-specific-trip/' . $encryptedId;
             return $request;
         });
 

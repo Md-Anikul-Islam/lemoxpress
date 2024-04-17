@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth/login');
 });
-
+Route::get('//get-specific-driver-trip-history/{id}', [DriverController::class, 'driverSpecificTripHistory']);
 //Admin
 Route::middleware('auth')->group(callback: function () {
     //Dashboard
