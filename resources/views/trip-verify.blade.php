@@ -50,7 +50,42 @@
                 </div>
                 <!-- end page title -->
 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="header-title">Trip History</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Passenger Name</th>
+                                            <th scope="col">Passenger Phone</th>
+                                            <th scope="col">Origin Address</th>
+                                            <th scope="col">Destination Address</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Total Fare</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{$tripRequest->passenger_name}}</td>
+                                            <td>{{$tripRequest->passenger_phone}}</td>
+                                            <td>{{$tripRequest->origin_address}}</td>
+                                            <td>{{$tripRequest->destination_address}}</td>
+                                            <td>{{$tripRequest->time}}</td>
+                                            <td>{{$tripRequest->total_fare}}</td>
+                                        </tr>
 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-xl-6">
@@ -131,42 +166,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="header-title">Trip History</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Passenger Name</th>
-                                            <th scope="col">Passenger Phone</th>
-                                            <th scope="col">Origin Address</th>
-                                            <th scope="col">Destination Address</th>
-                                            <th scope="col">Time</th>
-                                            <th scope="col">Total Fare</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>{{$tripRequest->passenger_name}}</td>
-                                            <td>{{$tripRequest->passenger_phone}}</td>
-                                            <td>{{$tripRequest->origin_address}}</td>
-                                            <td>{{$tripRequest->destination_address}}</td>
-                                            <td>{{$tripRequest->time}}</td>
-                                            <td>{{$tripRequest->total_fare}}</td>
-                                        </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
