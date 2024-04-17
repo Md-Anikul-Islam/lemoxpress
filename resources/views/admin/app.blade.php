@@ -5,7 +5,7 @@
     <title>Dashboard | Limo express</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
-    <meta content="SDMGA" name="author" />
+    <meta content="limo express" name="author" />
     <link rel="shortcut icon" href="{{asset('backend/images/lemo.svg')}}">
     <!-- Select2 css -->
     <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
