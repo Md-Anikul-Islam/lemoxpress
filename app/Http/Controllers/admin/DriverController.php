@@ -54,7 +54,7 @@ class DriverController extends Controller
         try {
             $id = decrypt($encryptedId);
             $tripRequest = TripRequest::where('id',$id)->with('driver','driver.car')->latest()->get();
-            return view('rip-verify',compact('tripRequest'));
+            return view('trip-verify',compact('tripRequest'));
             return response()->json(['tripRequest' => $tripRequest], 200);
         } catch (DecryptException $e) {
             return response()->json(['error' => 'Invalid encrypted ID'], 400);
