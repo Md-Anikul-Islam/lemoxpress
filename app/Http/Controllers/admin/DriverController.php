@@ -48,26 +48,18 @@ class DriverController extends Controller
         }
     }
 
-//    public function driverSpecificTripHistory($id)
-//    {
-//        $tripHistory = TripRequest::where('id',$id)->latest()->get();
-//        dd($tripHistory);
-//        return view('admin.pages.driver.tripRequest',compact('tripHistory'));
-//    }
 
     public function driverSpecificTripHistory($encryptedId)
     {
         try {
-            $id = decrypt($encryptedId); // Decrypt the encrypted ID
-            // Use the decrypted ID to fetch the corresponding data
+            $id = decrypt($encryptedId);
             $tripRequest = TripRequest::where('id',$id)->with('driver','driver.car')->latest()->get();
-            // Return the data as needed
+            return view('rip-verify',compact('tripRequest'));
             return response()->json(['tripRequest' => $tripRequest], 200);
         } catch (DecryptException $e) {
-            // Handle decryption error
             return response()->json(['error' => 'Invalid encrypted ID'], 400);
         } catch (ModelNotFoundException $e) {
-            // Handle model not found error
+
             return response()->json(['error' => 'Trip request not found'], 404);
         }
     }
