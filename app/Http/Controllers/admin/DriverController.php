@@ -60,7 +60,7 @@ class DriverController extends Controller
         try {
             $id = decrypt($encryptedId); // Decrypt the encrypted ID
             // Use the decrypted ID to fetch the corresponding data
-            $tripRequest = TripRequest::where('id',$id)->latest()->get();
+            $tripRequest = TripRequest::where('id',$id)->with('driver','driver.car')->latest()->get();
             // Return the data as needed
             return response()->json(['tripRequest' => $tripRequest], 200);
         } catch (DecryptException $e) {
