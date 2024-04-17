@@ -225,7 +225,7 @@ class DriverController extends Controller
 
     public function manualTripList()
     {
-        $baseUrl = 'http://127.0.0.1:8000'; // Your dynamic base URL
+        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
         $tripRequest = TripRequest::with('driver','driver.car')->latest()->get();
 
         // Append link to each trip request
