@@ -229,15 +229,15 @@ class DriverController extends Controller
         $tripRequest = TripRequest::with('driver','driver.car')->latest()->get();
 
         // Append link to each trip request
-//        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
-//            $request->link = $baseUrl . '/get-specific-trip/' . $request->id;
-//            return $request;
-//        });
+        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
+            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $request->id;
+            return $request;
+        });
 
         // Append encrypted link to each trip request
         $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
             $encryptedId = encrypt($request->id); // Encrypting the ID
-            $request->link = $baseUrl . '/get-specific-trip/' . $encryptedId;
+            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
             return $request;
         });
 

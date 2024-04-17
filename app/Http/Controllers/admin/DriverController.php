@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\DriverHistory;
 use App\Models\TripRequest;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Toastr;
 class DriverController extends Controller
@@ -46,11 +48,29 @@ class DriverController extends Controller
         }
     }
 
-    public function driverSpecificTripHistory($id)
+//    public function driverSpecificTripHistory($id)
+//    {
+//        $tripHistory = TripRequest::where('id',$id)->latest()->get();
+//        dd($tripHistory);
+//        return view('admin.pages.driver.tripRequest',compact('tripHistory'));
+//    }
+
+    public function driverSpecificTripHistory($encryptedId)
     {
-        $tripHistory = TripRequest::where('driver_id',$id)->latest()->get();
-        dd($tripHistory);
-        return view('admin.pages.driver.tripRequest',compact('tripHistory'));
+        try {
+            $id = decrypt($encryptedId); // Decrypt the encrypted ID
+            // Use the decrypted ID to fetch the corresponding data
+            $tripRequest = TripRequest::where('id',$id)->latest()->get();
+            // Return the data as needed
+            return response()->json(['tripRequest' => $tripRequest], 200);
+        } catch (DecryptException $e) {
+            // Handle decryption error
+            return response()->json(['error' => 'Invalid encrypted ID'], 400);
+        } catch (ModelNotFoundException $e) {
+            // Handle model not found error
+            return response()->json(['error' => 'Trip request not found'], 404);
+        }
     }
+
 
 }
