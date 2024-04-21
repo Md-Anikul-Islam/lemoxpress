@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->integer('phone_verification')->default(0);
             $table->string('profileLink')->nullable();
+            $table->integer('is_apple')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

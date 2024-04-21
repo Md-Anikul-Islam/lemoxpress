@@ -27,6 +27,7 @@ class User extends Authenticatable
         'role',
         'phone_verification',
         'profileLink',
+        'is_apple',
     ];
 
 
