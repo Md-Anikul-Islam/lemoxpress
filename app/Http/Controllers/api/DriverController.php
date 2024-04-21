@@ -20,10 +20,10 @@ class DriverController extends Controller
             'email' => 'required|email|unique:drivers',
             'phone' => 'required|string|unique:drivers',
             'profile' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'driving_licence_font_image' => 'required|image|mimes:jpeg,png,jpg',
-            'driving_licence_back_image' => 'required|image|mimes:jpeg,png,jpg',
-            'rta_card_font_image' => 'required|image|mimes:jpeg,png,jpg',
-            'rta_card_back_image' => 'required|image|mimes:jpeg,png,jpg',
+            'driving_licence_font_image' => 'required|mimes:jpeg,png,jpg,pdf',
+            'driving_licence_back_image' => 'required|mimes:jpeg,png,jpg,pdf',
+            'rta_card_font_image' => 'required|mimes:jpeg,png,jpg,pdf',
+            'rta_card_back_image' => 'required|mimes:jpeg,png,jpg,pdf',
         ]);
 
         $driver = new Driver();
