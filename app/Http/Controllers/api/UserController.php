@@ -34,6 +34,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->phone_verification = $request->phone_verification??0;
         $user->profileLink = $request->profileLink??null;
+        $user->is_apple = $request->is_apple??0;
         $user->role = 2;
         if ($request->userProfile) {
             $userProfile = time().'.'.$request->userProfile->extension();
@@ -41,7 +42,27 @@ class UserController extends Controller
             $user->userProfile = $userProfile;
         }
         $user->save();
-        return response()->json(['user' => $user,'message' => 'User Register Success'], 200);
+
+        // Create the response without the 'is_apple' field
+        $responseData = [
+            'user' => [
+                'uid' => $user->uid,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'phone_verification' => $user->phone_verification,
+                'profileLink' => $user->profileLink,
+                'role' => $user->role,
+                'userProfile' => $user->userProfile,
+                'updated_at' => $user->updated_at,
+                'created_at' => $user->created_at,
+                'id' => $user->id,
+            ],
+            'message' => 'User Register Success'
+        ];
+        return response()->json($responseData, 200);
+
+       // return response()->json(['user' => $user,'message' => 'User Register Success'], 200);
     }
 
 
@@ -66,16 +87,35 @@ class UserController extends Controller
 
         ]);
 
-        $user = User::where('phone', $request->credential)
-            ->orWhere('email', $request->credential)
-            ->first();
+        //dd($request->all());
 
-       // $user = User::where('phone', $request->phone)->first();
+//        if($request->is_apple == 1){
+//            $user = User::where('phone', $request->credential)
+//                ->orWhere('email', $request->credential)
+//                ->first();
+//        }elseif ($request->is_apple == 0){
+//            $user = User::where('phone', $request->credential)
+//                ->orWhere('email', $request->credential)
+//                ->first();
+//        }
 
 
 
-
-
+        if ($request->is_apple == 1) {
+            $user = User::where(function ($query) use ($request) {
+                $query->where('phone', $request->credential)
+                    ->orWhere('email', $request->credential);
+            })
+                ->where('is_apple', 1)
+                ->first();
+        } elseif ($request->is_apple == 0) {
+            $user = User::where(function ($query) use ($request) {
+                $query->where('phone', $request->credential)
+                    ->orWhere('email', $request->credential);
+            })
+                ->where('is_apple', 0)
+                ->first();
+        }
         if ($user) {
             // Selecting specific fields from the user object
             $userData = [
