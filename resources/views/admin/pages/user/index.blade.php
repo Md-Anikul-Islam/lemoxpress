@@ -39,7 +39,11 @@
                             <td>{{$userData->email? $userData->email:'N/A'}}</td>
                             <td>{{$userData->phone? $userData->phone:'N/A'}}</td>
                             <td>
-                                <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="max-width: 70px;">
+                                @if($userData->userProfile!=null)
+                                  <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="max-width: 70px;">
+                                @else
+                                    <img src="{{URL::to('backend/images/defult.png')}}" alt="logo" style="height: 70px;">
+                                @endif
                             </td>
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
