@@ -33,6 +33,7 @@
                         <th>Image</th>
                         <th>Model</th>
                         <th>Color</th>
+                        <th>Bag</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -49,6 +50,7 @@
                             </td>
                             <td>{{$fleetData->car_model}}</td>
                             <td>{{$fleetData->car_color}}</td>
+                            <td>{{$fleetData->car_bag}}</td>
                             <td>{{$fleetData->car_base}}</td>
                             <td>{{$fleetData->status==1? 'Active':'Inactive'}}</td>
                             <td style="width: 100px;">
@@ -74,10 +76,10 @@
 
                                                         <div class="mb-2">
                                                             <label for="example-select" class="form-label">Type</label>
-                                                            <select name="car_type" class="form-select" id="example-select">
+                                                            <select name="car_type_id" class="form-select" id="example-select">
                                                                 <option>Select Type</option>
                                                                 @foreach($fleetType as $fleetTypeData)
-                                                                    <option value="{{$fleetTypeData->id}}" {{$fleetTypeData->id == $fleetData->car_type ? 'selected' : ''}}>{{$fleetTypeData->name}}</option>
+                                                                    <option value="{{$fleetTypeData->id}}" {{$fleetTypeData->id == $fleetData->car_type_id ? 'selected' : ''}}>{{$fleetTypeData->name}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -105,6 +107,12 @@
                                                             <label for="passengers" class="form-label">Passengers</label>
                                                             <input type="text" id="passengers" name="passengers" value="{{$fleetData->passengers}}"
                                                                    class="form-control" placeholder="Enter Fleet Passengers" required>
+                                                        </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="car_bag" class="form-label">Car Bag</label>
+                                                            <input type="number" id="bag" name="car_bag" value="{{$fleetData->car_bag}}"
+                                                                   class="form-control" placeholder="Enter Fleet Bag Number" required>
                                                         </div>
 
                                                         <div class="mb-2">
@@ -209,6 +217,12 @@
                                     <label for="passengers" class="form-label">Passengers</label>
                                     <input type="text" id="passengers" name="passengers"
                                            class="form-control" placeholder="Enter Fleet Passengers" required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="car_bag" class="form-label">Car Bag</label>
+                                    <input type="number" id="bag" name="car_bag"
+                                           class="form-control" placeholder="Enter Fleet Bag Number" required>
                                 </div>
 
                                 <div class="mb-2">

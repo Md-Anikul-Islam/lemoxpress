@@ -14,6 +14,7 @@ class Fleet extends Model
         'car_model',
         'car_color',
         'car_base',
+        'car_bag',
         'car_image',
         'passengers',
         'status',

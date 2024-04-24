@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('car_color')->nullable();
             $table->string('car_image')->nullable();
             $table->string('car_base')->nullable();
+            $table->string('car_bag')->nullable();
             $table->string('passengers')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

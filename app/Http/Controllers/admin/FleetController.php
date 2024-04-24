@@ -20,7 +20,7 @@ class FleetController extends Controller
     {
         try {
             $request->validate([
-                'car_type' => 'required',
+                'car_type_id' => 'required',
                 'car_model' => 'required',
             ]);
 
@@ -29,11 +29,12 @@ class FleetController extends Controller
                 $request->car_image->move(public_path('images/carImage'), $car);
             }
             $fleet = new Fleet();
-            $fleet->car_type = $request->car_type;
+            $fleet->car_type_id = $request->car_type_id;
             $fleet->car_model = $request->car_model;
             $fleet->car_name = $request->car_name;
             $fleet->car_color = $request->car_color;
             $fleet->car_base = $request->car_base;
+            $fleet->car_bag = $request->car_bag;
             $fleet->passengers = $request->passengers;
             $fleet->car_image = $car??null;
 
@@ -52,17 +53,18 @@ class FleetController extends Controller
             $fleet = Fleet::findOrFail($id); // Find the fleet record by ID
 
             $request->validate([
-                'car_type' => 'required',
+                'car_type_id' => 'required',
                 'car_model' => 'required',
                 'car_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Update validation for car image to be nullable
             ]);
 
             // Update fleet attributes
-            $fleet->car_type = $request->car_type;
+            $fleet->car_type_id = $request->car_type_id;
             $fleet->car_model = $request->car_model;
             $fleet->car_name = $request->car_name;
             $fleet->car_color = $request->car_color;
             $fleet->car_base = $request->car_base;
+            $fleet->car_bag = $request->car_bag;
             $fleet->passengers = $request->passengers;
             $fleet->status = $request->status;
             // Check if a new image is uploaded
