@@ -176,6 +176,20 @@ class UserController extends Controller
         return response()->json(['userHistory' => $userHistory], 200);
     }
 
+    public function deleteUser(Request $request)
+    {
+        $request->validate([
+            'uid' => 'required',
+        ]);
+        $user = User::where('uid', $request->uid)->first();
+        if ($user) {
+            $user->delete();
+            return response()->json(['message' => 'User deleted successfully.'], 200);
+        } else {
+            return response()->json(['message' => 'No user found with this UID.'], 200);
+        }
+    }
+
 
 
 }
