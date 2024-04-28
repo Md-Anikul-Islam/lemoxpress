@@ -51,3 +51,5 @@ Route::get('/toll', [TollController::class, 'allToll']);
 
 //user delete
 Route::post('/delete-user', [UserController::class, 'deleteUser']);
+//user profile update
+Route::post('update-user-profile/{id}', [UserController::class, 'updateUserProfile']);

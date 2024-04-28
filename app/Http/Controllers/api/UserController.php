@@ -7,6 +7,7 @@ use App\Models\CouponUser;
 use App\Models\User;
 use App\Models\UserHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -63,6 +64,59 @@ class UserController extends Controller
         return response()->json($responseData, 200);
 
        // return response()->json(['user' => $user,'message' => 'User Register Success'], 200);
+    }
+
+
+    public function updateUserProfile(Request $request, $id)
+    {
+        try {
+            // Validate the request
+            $validator = Validator::make($request->all(), [
+                'userProfile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file size limit as needed
+            ]);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            // Find the user by ID
+            $user = User::find($id);
+
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+
+            // Move and update profile image
+            $profileImage = time() . '.' . $request->userProfile->extension();
+            $request->userProfile->move(public_path('images/userProfile'), $profileImage);
+            $user->userProfile = $profileImage;
+            $user->save();
+
+
+            $responseData = [
+                'user' => [
+                    'uid' => $user->uid,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'phone_verification' => $user->phone_verification,
+                    'profileLink' => $user->profileLink,
+                    'role' => $user->role,
+                    'userProfile' => $user->userProfile,
+                    'updated_at' => $user->updated_at,
+                    'created_at' => $user->created_at,
+                    'id' => $user->id,
+                ],
+                'message' => 'User profile image updated successfully'
+            ];
+
+            // Response with success message
+            return response()->json(['responseData' => $responseData], 200);
+        } catch (ValidationException $e) {
+            return response()->json(['message' => $e->getMessage(), 'errors' => $e->errors()], 400);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong', 'error' => $e->getMessage()], 500);
+        }
     }
 
 
