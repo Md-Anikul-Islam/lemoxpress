@@ -90,6 +90,14 @@ class UserController extends Controller
             $profileImage = time() . '.' . $request->userProfile->extension();
             $request->userProfile->move(public_path('images/userProfile'), $profileImage);
             $user->userProfile = $profileImage;
+
+            // Check if userProfile value is provided
+            if ($request->has('userProfile')) {
+                // Update profileLink with URL
+                $user->profileLink = url('images/userProfile/' . $profileImage);
+            }
+
+
             $user->save();
 
 
