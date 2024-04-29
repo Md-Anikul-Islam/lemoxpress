@@ -218,7 +218,8 @@ class DriverController extends Controller
         // Load driver and car information
         $tripRequest->load('driver.car');
         // Append link to the newly created trip request
-        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        //$baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        $baseUrl = url('/');
         $encryptedId = encrypt($tripRequest->id); // Encrypting the ID
         $tripRequest->link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
         return response()->json(['tripRequest' => $tripRequest], 200);
@@ -227,7 +228,12 @@ class DriverController extends Controller
 
     public function manualTripList()
     {
-        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        //$baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+
+
+         $baseUrl = url('/');
+         //dd($baseUrl);
+
         $tripRequest = TripRequest::with('driver','driver.car')->latest()->get();
 
         // Append link to each trip request
@@ -261,7 +267,8 @@ class DriverController extends Controller
         // Load driver and car information
         $tripRequest->load('driver.car');
         // Append link to the newly created trip request
-        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        //$baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        $baseUrl = url('/');
         $encryptedId = encrypt($tripRequest->id); // Encrypting the ID
         $tripRequest->link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
         return response()->json(['tripRequest' => $tripRequest], 200);
