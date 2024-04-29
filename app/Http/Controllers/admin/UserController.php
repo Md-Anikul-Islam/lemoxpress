@@ -15,7 +15,7 @@ class UserController extends Controller
         return view('admin.pages.user.index',compact('user'));
     }
 
-    public function userHistpry($id)
+    public function userHistory($id)
     {
         $userHistpry = UserHistory::where('uid',$id)->latest()->get();
         return view('admin.pages.user.history',compact('userHistpry'));

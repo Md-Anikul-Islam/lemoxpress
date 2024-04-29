@@ -61,6 +61,6 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/driver-trip-history/{id}', [DriverController::class, 'driverTripHistory'])->name('driver.trip.history');
     //User Section
     Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');
-    Route::get('/user-history/{id}', [UserController::class, 'userHistpry'])->name('user.history');
+    Route::get('/user-history/{id}', [UserController::class, 'userHistory'])->name('user.history');
 });
 require __DIR__.'/auth.php';
