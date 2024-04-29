@@ -35,6 +35,7 @@ Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHis
 Route::post('/trip-request', [DriverController::class, 'storeDriverManuallyTrip']);
 Route::get('/get-trip-list', [DriverController::class, 'manualTripList']);
 Route::get('/get-specific-trip/{id}', [DriverController::class, 'manualSpecificTrip']);
+Route::post('/update-trip-status/{id}', [DriverController::class, 'updateTripStatus']);
 
 //Driver Ratting
 Route::post('/ratting-store', [DriverController::class, 'driverRatting']);

@@ -253,6 +253,20 @@ class DriverController extends Controller
         return response()->json(['manualSpecificTrip' => $tripRequest], 200);
     }
 
+    public function updateTripStatus(Request $request, $id)
+    {
+        $tripRequest = TripRequest::find($id);
+        $tripRequest->is_complete = $request->is_complete;
+        $tripRequest->save();
+        // Load driver and car information
+        $tripRequest->load('driver.car');
+        // Append link to the newly created trip request
+        $baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
+        $encryptedId = encrypt($tripRequest->id); // Encrypting the ID
+        $tripRequest->link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
+        return response()->json(['tripRequest' => $tripRequest], 200);
+    }
+
 
 
 
