@@ -274,6 +274,12 @@ class DriverController extends Controller
         return response()->json(['tripRequest' => $tripRequest], 200);
     }
 
+    public function getDriverProfile($id)
+    {
+        $driver = Driver::where('did',$id)->first();
+        return response()->json(['driver' => $driver], 200);
+    }
+
 
 
 

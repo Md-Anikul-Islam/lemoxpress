@@ -31,6 +31,7 @@ Route::post('/drivers', [DriverController::class, 'storeDriver']);
 Route::post('/driver-login', [DriverController::class, 'loginDriver']);
 Route::post('/drivers-history', [DriverController::class, 'storeDriverHistory']);
 Route::get('/get-drivers-history/{did}', [DriverController::class, 'getDriverHistory']);
+Route::get('/get-driver-profile/{id}', [DriverController::class, 'getDriverProfile']);
 //Driver Trip Request
 Route::post('/trip-request', [DriverController::class, 'storeDriverManuallyTrip']);
 Route::get('/get-trip-list', [DriverController::class, 'manualTripList']);
