@@ -213,6 +213,7 @@ class DriverController extends Controller
         $tripRequest->destination_address = $request->destination_address;
         $tripRequest->total_fare = $request->total_fare;
         $tripRequest->time = $request->time;
+        $tripRequest->is_complete = 0;
         $tripRequest->save();
         // Load driver and car information
         $tripRequest->load('driver.car');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('destination_address');
             $table->string('time');
             $table->string('total_fare');
+            $table->string('is_complete')->default(0);
             $table->timestamps();
         });
     }

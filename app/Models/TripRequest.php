@@ -16,6 +16,7 @@ class TripRequest extends Model
         'destination_address',
         'time',
         'total_fare',
+        'is_complete'
     ];
 
     public function driver()
