@@ -112,8 +112,6 @@
                             <td style="width: 100px;">
                                 <div class="d-flex  gap-1">
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">Change Status</button>
-                                    <a href="{{route('driver.history',$driverData->did)}}"class="btn btn-info">History</a>
-                                    <a href="{{route('driver.trip.history',$driverData->did)}}"class="btn btn-info">Trip</a>
                                     <a href="{{route('driver.destroy',$driverData->id)}}"class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#danger-header-modal{{$driverData->id}}">Delete</a>
                                 </div>
 
