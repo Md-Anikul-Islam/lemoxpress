@@ -257,7 +257,7 @@ class DriverController extends Controller
     {
 
         $tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->get();
-        return response()->json(['manualSpecificTrip' => $tripRequest], 200);
+        return response()->json(['manualTripList' => $tripRequest], 200);
     }
 
     public function updateTripStatus(Request $request, $id)
