@@ -66,6 +66,7 @@
                                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editNewModalId{{$driverData->id}}">Change Status</button>
                                     <a href="{{route('driver.history',$driverData->did)}}"class="btn btn-info">History</a>
                                     <a href="{{route('driver.trip.history',$driverData->did)}}"class="btn btn-info">Trip</a>
+                                    <a href="{{route('driver.destroy',$driverData->id)}}"class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#danger-header-modal{{$driverData->id}}">Delete</a>
                                 </div>
 
                             </td>
@@ -102,6 +103,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Delete Modal -->
+                            <div id="danger-header-modal{{$driverData->id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel{{$driverData->id}}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header modal-colored-header bg-danger">
+                                            <h4 class="modal-title" id="danger-header-modalLabe{{$driverData->id}}l">Delete</h4>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @if($driverData->driverHistory->count() > 0)
+                                                <h5 class="mt-0">
+                                                    Deleting this driver will also remove all associated trip history records. Are you sure you want to proceed?
+                                                </h5>
+                                            @else
+                                                <h5 class="mt-0">
+                                                    This driver has no associated trip history. Are you sure you want to delete this driver?
+                                                </h5>
+                                            @endif
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                            <a href="{{route('driver.destroy',$driverData->id)}}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </tr>
                     @endforeach
                     </tbody>

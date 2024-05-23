@@ -17,6 +17,7 @@ class DashboardController extends Controller
         $totalDriver = Driver::count();
         $totalFleet =Fleet::count();
         $totalToll =Toll::count();
-        return view('admin.dashboard',compact('totalUser','totalDriver', 'totalFleet','totalToll'));
+        $driver = Driver::where('status',0)->with('driverHistory')->latest()->get();
+        return view('admin.dashboard',compact('totalUser','totalDriver', 'totalFleet','totalToll','driver'));
     }
 }

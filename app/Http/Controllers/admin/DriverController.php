@@ -3,6 +3,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\DriverHistory;
+use App\Models\DriverRatting;
 use App\Models\TripRequest;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,6 +64,24 @@ class DriverController extends Controller
             return response()->json(['error' => 'Trip request not found'], 404);
         }
     }
+    //make delete if i delete driver then delete driver, driver history and this driver ratting also
+    public function destroy($did)
+    {
+        try {
+            $driver = Driver::findOrFail($did);
+
+            // Delete related DriverHistory and DriverRatting records
+            DriverHistory::where('did', $driver->did)->delete();
+            DriverRatting::where('did', $driver->did)->delete();
+            $driver->delete();
+            Toastr::success('Driver  deleted successfully', 'Success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+
 
 
 }
