@@ -255,7 +255,8 @@ class DriverController extends Controller
 
     public function manualSpecificTrip($id)
     {
-        $tripRequest = TripRequest::where('id',$id)->with('driver','driver.car')->find($id);
+
+        $tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->get();
         return response()->json(['manualSpecificTrip' => $tripRequest], 200);
     }
 
