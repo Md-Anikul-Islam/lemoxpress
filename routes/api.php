@@ -35,7 +35,7 @@ Route::get('/get-driver-profile/{id}', [DriverController::class, 'getDriverProfi
 //Driver Trip Request
 Route::post('/trip-request', [DriverController::class, 'storeDriverManuallyTrip']);
 Route::get('/get-trip-list', [DriverController::class, 'manualTripList']);
-Route::get('/get-specific-trip/{id}', [DriverController::class, 'manualSpecificTrip']);
+Route::get('/get-specific-trip-driver-list/{id}', [DriverController::class, 'manualSpecificTrip']);
 Route::post('/update-trip-status/{id}', [DriverController::class, 'updateTripStatus']);
 
 //Driver Ratting
