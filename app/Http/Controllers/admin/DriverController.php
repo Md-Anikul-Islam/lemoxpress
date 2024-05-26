@@ -13,7 +13,7 @@ class DriverController extends Controller
 {
     public function driverList()
     {
-        $driver = Driver::with('driverHistory')->latest()->get();
+        $driver = Driver::where('status',1)->with('driverHistory')->latest()->get();
         return view('admin.pages.driver.index',compact('driver'));
     }
 
@@ -43,7 +43,7 @@ class DriverController extends Controller
             $driver->status = (int)$request->status;
             $driver->save();
             Toastr::success('Driver Status Updated Successfully', 'Success');
-            return redirect()->back();
+            return redirect()->route('driver.list');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -79,6 +79,25 @@ class DriverController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
+    }
+
+    public function pendingDriverList()
+    {
+        $driver = Driver::where('status',0)->latest()->get();
+        return view('admin.pages.driver.pendingList',compact('driver'));
+    }
+
+    public function driverDetails($id)
+    {
+        $driver = Driver::where('id',$id)->with('driverHistory','car')->first();
+        //dd($driver);
+        return view('admin.pages.driver.details',compact('driver'));
+    }
+
+    public function suspendDriverList()
+    {
+        $driver = Driver::where('status',2)->latest()->get();
+        return view('admin.pages.driver.rejectList',compact('driver'));
     }
 
 

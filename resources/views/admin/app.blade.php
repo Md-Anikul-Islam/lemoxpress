@@ -137,11 +137,20 @@
                     <div class="collapse" id="driverPages">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="{{route('driver.list')}}">Driver List</a>
+                                <a href="{{route('pending.driver.list')}}">Pending Driver List</a>
                             </li>
+                            <li>
+                                <a href="{{route('driver.list')}}">Approved Driver List</a>
+                            </li>
+                            <li>
+                                <a href="{{route('suspend.driver.list')}}">Suspend Driver List</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
+
+
 
                 <li class="side-nav-item">
                     <a data-bs-toggle="collapse" href="#userPages" aria-expanded="false" aria-controls="userPages" class="side-nav-link">
@@ -153,6 +162,25 @@
                         <ul class="side-nav-second-level">
                             <li>
                                 <a href="{{route('user.list')}}">User List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#tripPages" aria-expanded="false" aria-controls="tripPages" class="side-nav-link">
+                        <i class="ri-pages-line"></i>
+                        <span> Trip </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="tripPages">
+                        <ul class="side-nav-second-level">
+                            <li>
+                                <a href="{{route('complete.trip.list')}}">Complete Trip</a>
+                            </li>
+                            <li>
+                                <a href="{{route('incomplete.trip.list')}}">Incomplete Trip</a>
                             </li>
                         </ul>
                     </div>

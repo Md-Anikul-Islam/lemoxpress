@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\DriverController;
 use App\Http\Controllers\admin\FleetController;
 use App\Http\Controllers\admin\FleetTypeController;
 use App\Http\Controllers\admin\TollController;
+use App\Http\Controllers\admin\TripController;
 use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,10 @@ Route::middleware('auth')->group(callback: function () {
 
     //Driver Section
     Route::get('/driver-list', [DriverController::class, 'driverList'])->name('driver.list');
+    Route::get('/pending-driver-list', [DriverController::class, 'pendingDriverList'])->name('pending.driver.list');
+    Route::get('/suspend-driver-list', [DriverController::class, 'suspendDriverList'])->name('suspend.driver.list');
+    Route::get('/driver-details/{id}', [DriverController::class, 'driverDetails'])->name('driver.details');
+
     Route::put('/driver-update/{id}', [DriverController::class, 'update'])->name('driver.update');
     Route::get('/driver-history/{id}', [DriverController::class, 'driverHistpry'])->name('driver.history');
     Route::get('/driver-trip-history/{id}', [DriverController::class, 'driverTripHistory'])->name('driver.trip.history');
@@ -63,5 +68,9 @@ Route::middleware('auth')->group(callback: function () {
     //User Section
     Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');
     Route::get('/user-history/{id}', [UserController::class, 'userHistory'])->name('user.history');
+
+    //Trip Section
+    Route::get('/complete-trip-list', [TripController::class, 'index'])->name('complete.trip.list');
+    Route::get('/incomplete-trip-list', [TripController::class, 'inComplete'])->name('incomplete.trip.list');
 });
 require __DIR__.'/auth.php';

@@ -130,3 +130,56 @@ h2.file_system_title {
     color: #35bccb;
     margin-bottom: 15px;
 }
+.dropdown_btn_style {
+    border: none;
+    background: none;
+    font-size: 23px;
+}
+.dropstart .dropdown-toggle::before {
+    display: none;
+}
+.action_dropdown_menu {
+    padding: 5px;
+}
+.action_dropdown_menu li {
+    margin-bottom: 5px;
+}
+.action_dropdown_menu li:last-child {
+    margin-bottom: 0px;
+}
+.action_dropdown_menu li a {
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: .3s;
+    background: #009ef724;
+    color: #071437;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.action_dropdown_menu li a:hover {
+    background: #d62525;
+    color: #fff;
+}
+.fs-6 {
+    font-size: 1.075rem!important;
+}
+.fw-semibold {
+    font-weight: 500!important;
+}
+.col-form-label {
+    padding-top: calc(.775rem + 1px);
+    padding-bottom: calc(.775rem + 1px);
+    margin-bottom: 0;
+    font-size: inherit;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #252F4A;
+}
+
+.form-control.form-control-solid {
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+    color: #4B5675;
+    transition: color .2s ease;
+}
