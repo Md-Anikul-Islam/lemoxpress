@@ -183,3 +183,6 @@ h2.file_system_title {
     color: #4B5675;
     transition: color .2s ease;
 }
+h3.fw-bold.m-0 {
+    font-size: 20px;
+}

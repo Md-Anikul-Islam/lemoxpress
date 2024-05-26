@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6">
-            <div class="card mb-5 mb-xl-10">
+            <div class="card">
                 <div class="card-header border-0 cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">Basic Info!</h3>
@@ -39,9 +39,9 @@
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">Image</label>
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                 @if($driver->profile != null)
-                                    <img src="{{ asset('images/profile/' . $driver->profile) }}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%;">
+                                    <img src="{{ asset('images/profile/' . $driver->profile) }}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;">
                                 @else
-                                    <img src="{{ URL::to('backend/images/default.png') }}" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;">
+                                    <img src="{{ URL::to('backend/images/default.png') }}" alt="logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
                                 @endif
                             </div>
                         </div>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="col-12 col-md-6">
-            <div class="card mb-5 mb-xl-10">
+            <div class="card">
                 <div class="card-header border-0 cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">Car Info!</h3>
@@ -144,7 +144,7 @@
         </div>
 
         <div class="col-12 col-md-6">
-            <div class="card mb-5 mb-xl-10">
+            <div class="card">
                 <div class="card-header border-0 cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">Licence Info!</h3>
@@ -152,16 +152,16 @@
                 </div>
                 <div class="collapse show">
                     <div class="card-body border-top p-9">
-                        <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">Licence font Image</label>
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <img src="{{asset('images/driving_licence_font_image/'. $driver->driving_licence_font_image )}}" alt="Current Image" style="width: 500px; height: 400px;">
+                        <div class="row mb-6 mb-2">
+                            <label class="col-form-label fw-semibold fs-6">Licence font Image</label>
+                            <div class="fv-row fv-plugins-icon-container">
+                                <img src="{{asset('images/driving_licence_font_image/'. $driver->driving_licence_font_image )}}" alt="Current Image" style="width: 500px; height: 300px; object-fit: contain;">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">Licence Back Image</label>
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                               <img src="{{asset('images/driving_licence_back_image/'. $driver->driving_licence_back_image )}}" alt="Current Image" style="width: 500px; height: 400px;">
+                            <label class="col-form-label fw-semibold fs-6">Licence Back Image</label>
+                            <div class="fv-row fv-plugins-icon-container">
+                               <img src="{{asset('images/driving_licence_back_image/'. $driver->driving_licence_back_image )}}" alt="Current Image" style="width: 500px; height: 300px; object-fit: contain;">
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
         </div>
 
         <div class="col-12 col-md-6">
-            <div class="card mb-5 mb-xl-10">
+            <div class="card">
                 <div class="card-header border-0 cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">RTA Info!</h3>
@@ -178,16 +178,16 @@
                 </div>
                 <div class="collapse show">
                     <div class="card-body border-top p-9">
-                        <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">RTA card font Image</label>
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                 <img src="{{asset('images/rta_card_font_image/'. $driver->rta_card_font_image )}}" alt="Current Image" style="width: 500px; height: 400px;">
+                        <div class="row mb-6 mb-2">
+                            <label class="col-form-label fw-semibold fs-6">RTA card font Image</label>
+                            <div class="fv-row fv-plugins-icon-container">
+                                 <img src="{{asset('images/rta_card_font_image/'. $driver->rta_card_font_image )}}" alt="Current Image" style="width: 500px; height: 300px; object-fit: contain;">
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">RTA card Back Image</label>
-                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                 <img src="{{asset('images/rta_card_back_image/'. $driver->rta_card_back_image )}}" alt="Current Image" style="width: 500px; height: 400px;">
+                            <label class="col-form-label fw-semibold fs-6">RTA card Back Image</label>
+                            <div class="fv-row fv-plugins-icon-container">
+                                 <img src="{{asset('images/rta_card_back_image/'. $driver->rta_card_back_image )}}" alt="Current Image" style="width: 500px; height: 300px; object-fit: contain;">
                             </div>
                         </div>
                     </div>
@@ -196,12 +196,10 @@
         </div>
     </div>
 
-
-
     @if($driver->status === '0' || $driver->status === '2')
     <div class="row">
         <div class="col-12 col-md-12">
-            <div class="card mb-5 mb-xl-10">
+            <div class="card">
                 <div class="card-header border-0 cursor-pointer">
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">Change Status!</h3>
