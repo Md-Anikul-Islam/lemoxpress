@@ -171,7 +171,7 @@
                 <li class="side-nav-item">
                     <a data-bs-toggle="collapse" href="#tripPages" aria-expanded="false" aria-controls="tripPages" class="side-nav-link">
                         <i class="ri-pages-line"></i>
-                        <span> Trip </span>
+                        <span>Manual Trip </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="tripPages">
@@ -181,6 +181,21 @@
                             </li>
                             <li>
                                 <a href="{{route('incomplete.trip.list')}}">Incomplete Trip</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#tripRequestPages" aria-expanded="false" aria-controls="tripRequestPages" class="side-nav-link">
+                        <i class="ri-pages-line"></i>
+                        <span>Request Trip </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="tripRequestPages">
+                        <ul class="side-nav-second-level">
+                            <li>
+                                <a href="{{route('request.trip.list')}}">Request Trip</a>
                             </li>
                         </ul>
                     </div>

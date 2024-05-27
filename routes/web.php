@@ -69,8 +69,12 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/user-list', [UserController::class, 'userList'])->name('user.list');
     Route::get('/user-history/{id}', [UserController::class, 'userHistory'])->name('user.history');
 
-    //Trip Section
+    //Manual Trip Section
     Route::get('/complete-trip-list', [TripController::class, 'index'])->name('complete.trip.list');
     Route::get('/incomplete-trip-list', [TripController::class, 'inComplete'])->name('incomplete.trip.list');
+
+    //Request Trip Section
+    Route::get('/request-trip-list', [TripController::class, 'requestTripList'])->name('request.trip.list');
+
 });
 require __DIR__.'/auth.php';
