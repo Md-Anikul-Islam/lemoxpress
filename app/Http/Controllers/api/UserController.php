@@ -252,6 +252,16 @@ class UserController extends Controller
         }
     }
 
+    public function getUserProfile($id)
+    {
+        $user = User::where('uid',$id)->first();
+        if ($user) {
+            return response()->json(['user' => $user], 200);
+        } else {
+            return response()->json(['message' => 'No user found with this ID.'], 200);
+        }
+    }
+
 
 
 }

@@ -45,6 +45,7 @@ Route::post('/user-register', [UserController::class, 'storeUser']);
 Route::post('/user-login', [UserController::class, 'loginUser']);
 Route::post('/user-history', [UserController::class, 'storeUserHistory']);
 Route::get('/get-user-history/{uid}', [UserController::class, 'getUserHistory']);
+Route::get('/get-user-profile/{id}', [UserController::class, 'getUserProfile']);
 //Coupon
 Route::get('/coupon', [CouponController::class, 'allCoupon']);
 Route::post('/apply-coupon', [CouponController::class,'applyCoupon']);
@@ -55,3 +56,5 @@ Route::get('/toll', [TollController::class, 'allToll']);
 Route::post('/delete-user', [UserController::class, 'deleteUser']);
 //user profile update
 Route::post('update-user-profile/{id}', [UserController::class, 'updateUserProfile']);
+
+
