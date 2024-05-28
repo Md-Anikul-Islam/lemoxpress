@@ -80,8 +80,8 @@ class UserController extends Controller
             }
 
             // Find the user by ID
-            $user = User::find($id);
-
+            //$user = User::find($id);
+            $user = User::where('uid', $id)->first();
             if (!$user) {
                 return response()->json(['message' => 'User not found'], 404);
             }
