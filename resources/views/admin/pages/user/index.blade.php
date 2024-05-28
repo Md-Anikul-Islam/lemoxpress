@@ -40,7 +40,7 @@
                             <td>{{$userData->phone? $userData->phone:'N/A'}}</td>
                             <td>
                                 @if($userData->userProfile!=null)
-                                  <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="max-width: 70px;">
+                                  <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%;">
                                 @else
                                     <img src="{{URL::to('backend/images/defult.png')}}" alt="logo" style="height: 70px;">
                                 @endif
