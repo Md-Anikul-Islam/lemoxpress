@@ -70,37 +70,32 @@ class UserController extends Controller
     public function updateUserProfile(Request $request, $id)
     {
         try {
-            // Validate the request
-            $validator = Validator::make($request->all(), [
-                'userProfile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file size limit as needed
-            ]);
-
-            if ($validator->fails()) {
-                throw new ValidationException($validator);
-            }
-
-            // Find the user by ID
+//            $validator = Validator::make($request->all(), [
+//                'userProfile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+//            ]);
+//            if ($validator->fails()) {
+//                throw new ValidationException($validator);
+//            }
             //$user = User::find($id);
             $user = User::where('uid', $id)->first();
             if (!$user) {
                 return response()->json(['message' => 'User not found'], 404);
             }
-
             // Move and update profile image
             $profileImage = time() . '.' . $request->userProfile->extension();
             $request->userProfile->move(public_path('images/userProfile'), $profileImage);
             $user->userProfile = $profileImage;
-
-            // Check if userProfile value is provided
             if ($request->has('userProfile')) {
-                // Update profileLink with URL
                 $user->profileLink = url('images/userProfile/' . $profileImage);
+            }
+
+            // Update name if provided
+            if ($request->has('name')) {
+                $user->name = $request->input('name');
             }
 
 
             $user->save();
-
-
             $responseData = [
                 'user' => [
                     'uid' => $user->uid,
@@ -117,8 +112,6 @@ class UserController extends Controller
                 ],
                 'message' => 'User profile image updated successfully'
             ];
-
-            // Response with success message
             return response()->json(['responseData' => $responseData], 200);
         } catch (ValidationException $e) {
             return response()->json(['message' => $e->getMessage(), 'errors' => $e->errors()], 400);
