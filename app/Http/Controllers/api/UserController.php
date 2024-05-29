@@ -173,7 +173,7 @@ class UserController extends Controller
 
             return response()->json(['responseData' => $responseData], 200);
         } catch (ValidationException $e) {
-            return response()->json(['message' => $e->getMessage(), 'errors' => $e->errors()], 400);
+            return response()->json(['message' => 'Validation Failed', 'errors' => $e->errors()], 400);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e->getMessage()], 500);
         }
