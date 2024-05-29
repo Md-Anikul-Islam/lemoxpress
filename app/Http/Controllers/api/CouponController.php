@@ -33,11 +33,11 @@ class CouponController extends Controller
         // Find the coupon
         $coupon = Coupon::find($couponId);
         if (!$coupon) {
-            return response()->json(['message' => 'Coupon not found'], 404);
+            return response()->json(['message' => 'Coupon not found'], 200);
         }
         // Check if the coupon has expired
         if (Carbon::now()->gt($coupon->valid_to)) {
-            return response()->json(['message' => 'Coupon has expired'], 400);
+            return response()->json(['message' => 'Coupon has expired'], 200);
         }
         // Check if the user has reached the maximum usage limit for the coupon
         $userCouponCount = CouponUser::where('coupon_id', $coupon->id)->where('apply_status', 1)
@@ -45,7 +45,7 @@ class CouponController extends Controller
             ->count();
 
         if ($userCouponCount >= $coupon->max_uses) {
-            return response()->json(['message' => 'Coupon not valid for you'], 400);
+            return response()->json(['message' => 'Coupon not valid for you'], 200);
         }else{
             $couponUser = new CouponUser();
             $couponUser->coupon_id = $couponId;
