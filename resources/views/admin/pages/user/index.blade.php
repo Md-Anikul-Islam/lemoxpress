@@ -22,11 +22,10 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>UID</th>
+                        <th>Profile</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Profile</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -34,22 +33,40 @@
                     @foreach($user as $key=>$userData)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$userData->uid}}</td>
-                            <td>{{$userData->name}}</td>
-                            <td>{{$userData->email? $userData->email:'N/A'}}</td>
-                            <td>{{$userData->phone? $userData->phone:'N/A'}}</td>
                             <td>
                                 @if($userData->userProfile!=null)
-                                  <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%;">
+                                    <img src="{{asset('images/userProfile/'. $userData->userProfile )}}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%;">
                                 @else
                                     <img src="{{URL::to('backend/images/defult.png')}}" alt="logo" style="height: 70px;">
                                 @endif
                             </td>
+                            <td>{{$userData->name}}</td>
+                            <td>{{$userData->email? $userData->email:'N/A'}}</td>
+                            <td>{{$userData->phone? $userData->phone:'N/A'}}</td>
+
+
+
+
                             <td style="width: 100px;">
-                                <div class="d-flex  gap-1">
-                                    <a href="{{route('user.history',$userData->uid)}}"class="btn btn-info">History</a>
+                                <div class="btn-group dropstart action_button_wrapper">
+                                    <button type="button" class="dropdown-toggle dropdown_btn_style" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                        </svg>
+                                    </button>
+                                    <ul class="dropdown-menu action_dropdown_menu">
+                                        <li>
+                                            <a href="{{route('user.history',$userData->uid)}}">History</a>
+                                        </li>
+                                    </ul>
                                 </div>
+
                             </td>
+
+
+
+
+
                         </tr>
                     @endforeach
                     </tbody>
