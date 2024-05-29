@@ -36,7 +36,7 @@
                             <td>{{$driverHistpryData->did}}</td>
                             <td>{{$driverHistpryData->origin_address}}</td>
                             <td>{{$driverHistpryData->destination_address}}</td>
-                            <td>{{$driverHistpryData->time}}</td>
+                            <td>{{ Carbon\Carbon::parse($driverHistpryData->time)->format('d M Y g:ia') }}</td>
                             <td>{{$driverHistpryData->total_fare}}</td>
                         </tr>
                     @endforeach

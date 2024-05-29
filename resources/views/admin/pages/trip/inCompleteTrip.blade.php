@@ -43,7 +43,7 @@
                             <td>{{$tripData->origin_address}}</td>
                             <td>{{$tripData->destination_address}}</td>
                             <td>{{$tripData->total_fare}}</td>
-                            <td>{{$tripData->time}}</td>
+                            <td>{{ Carbon\Carbon::parse($tripData->time)->format('d M Y g:ia') }}</td>
                         </tr>
                     @endforeach
                     </tbody>

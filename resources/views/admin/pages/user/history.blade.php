@@ -36,7 +36,7 @@
                             <td>{{$userHistpryData->uid}}</td>
                             <td>{{$userHistpryData->origin_address}}</td>
                             <td>{{$userHistpryData->destination_address}}</td>
-                            <td>{{$userHistpryData->time}}</td>
+                            <td>{{ Carbon\Carbon::parse($userHistpryData->time)->format('d M Y g:ia') }}</td>
                             <td>{{$userHistpryData->total_fare}}</td>
                         </tr>
                     @endforeach
