@@ -203,7 +203,7 @@ class DriverController extends Controller
             'origin_address' => 'required',
             'destination_address' => 'required',
             'time' => 'required',
-            'total_fare' => 'required',
+            'estimated_fare' => 'required',
         ]);
         $tripRequest = new TripRequest();
         $tripRequest->driver_id = $request->driver_id;
@@ -211,7 +211,8 @@ class DriverController extends Controller
         $tripRequest->passenger_phone = $request->passenger_phone;
         $tripRequest->origin_address = $request->origin_address;
         $tripRequest->destination_address = $request->destination_address;
-        $tripRequest->total_fare = $request->total_fare;
+        $tripRequest->estimated_fare = $request->estimated_fare;
+        $tripRequest->calculated_fare = $request->calculated_fare;
         $tripRequest->time = $request->time;
         $tripRequest->is_complete = "0";
         $tripRequest->save();
@@ -264,6 +265,7 @@ class DriverController extends Controller
     {
         $tripRequest = TripRequest::find($id);
         $tripRequest->is_complete = $request->is_complete;
+        $tripRequest->fare_received_status = $request->fare_received_status;
         $tripRequest->save();
         // Load driver and car information
         $tripRequest->load('driver.car');

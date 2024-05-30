@@ -15,8 +15,10 @@ class TripRequest extends Model
         'origin_address',
         'destination_address',
         'time',
-        'total_fare',
-        'is_complete'
+        'estimated_fare',
+        'calculated_fare',
+        'fare_received_status',
+        'is_complete',
     ];
 
     public function driver()
