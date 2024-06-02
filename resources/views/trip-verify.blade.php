@@ -85,9 +85,9 @@
                                             <td>{{$tripRequest->estimated_fare}}</td>
                                             <td>{{$tripRequest->calculated_fare}}</td>
                                             <td>
-                                                @if($tripRequest->fare_received_status===1)
+                                                @if($tripRequest->fare_received_status==1)
                                                     Estimated Fare
-                                                @elseif($tripRequest->fare_received_status===2)
+                                                @elseif($tripRequest->fare_received_status==2)
                                                     Received Fare
                                                 @else
                                                     Not Received
