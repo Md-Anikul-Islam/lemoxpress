@@ -279,7 +279,7 @@ class DriverController extends Controller
 
     public function getDriverProfile($id)
     {
-        $driver = Driver::where('did',$id)->first();
+        $driver = Driver::where('did',$id)->with('car')->first();
         return response()->json(['driver' => $driver], 200);
     }
 
