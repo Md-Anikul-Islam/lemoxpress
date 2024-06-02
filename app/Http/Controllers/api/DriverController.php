@@ -279,9 +279,18 @@ class DriverController extends Controller
 
     public function getDriverProfile($id)
     {
-        $driver = Driver::where('did',$id)->with('car')->first();
+        $driver = Driver::where('did', $id)->with('car.fleetType')->first();
+
+        if ($driver && $driver->car && $driver->car->fleetType) {
+            // Add car_type_name directly to the car object
+            $driver->car->car_type_name = $driver->car->fleetType->name;
+            // Remove the fleetType relationship from the car object
+            unset($driver->car->fleetType);
+        }
+
         return response()->json(['driver' => $driver], 200);
     }
+
 
 
 
