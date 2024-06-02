@@ -17,6 +17,10 @@
         .content-page {
              margin-left: 0;
         }
+        html[data-sidenav-size=condensed]:not([data-layout=topnav]) .wrapper .content-page,
+        html[data-sidenav-size=condensed]:not([data-layout=topnav]) .wrapper .navbar-custom {
+            margin-left: 0;
+        }
     </style>
 </head>
 
