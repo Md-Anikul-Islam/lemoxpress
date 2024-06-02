@@ -52,9 +52,13 @@ class DriverController extends Controller
 
     public function driverSpecificTripHistory($encryptedId)
     {
+
+        //dd($encryptedId);
         try {
-            $id = decrypt($encryptedId);
+             $id = decrypt($encryptedId);
+            //($id);
             $tripRequest = TripRequest::where('id',$id)->with('driver','driver.car')->first();
+            //dd($tripRequest);
             return view('trip-verify',compact('tripRequest'));
             return response()->json(['tripRequest' => $tripRequest], 200);
         } catch (DecryptException $e) {

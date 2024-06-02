@@ -66,7 +66,9 @@
                                             <th scope="col">Origin Address</th>
                                             <th scope="col">Destination Address</th>
                                             <th scope="col">Time</th>
-                                            <th scope="col">Total Fare</th>
+                                            <th scope="col">Estimated Fare</th>
+                                            <th scope="col">Calculated Fare</th>
+                                            <th scope="col">Received Fare</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -76,7 +78,17 @@
                                             <td>{{$tripRequest->origin_address}}</td>
                                             <td>{{$tripRequest->destination_address}}</td>
                                             <td>{{$tripRequest->time}}</td>
-                                            <td>{{$tripRequest->total_fare}}</td>
+                                            <td>{{$tripRequest->estimated_fare}}</td>
+                                            <td>{{$tripRequest->calculated_fare}}</td>
+                                            <td>
+                                                @if($tripRequest->fare_received_status===1)
+                                                    Estimated Fare
+                                                @elseif($tripRequest->fare_received_status===2)
+                                                    Received Fare
+                                                @else
+                                                    Not Received
+                                                @endif
+                                            </td>
                                         </tr>
 
                                         </tbody>
@@ -109,7 +121,8 @@
                                         <tr>
                                             <td>
                                                 @if($tripRequest->driver)
-                                                <img src="{{asset('images/profile/'.$tripRequest->driver->profile )}}" alt="Current Image" style="max-width: 50px; height: 50px;">
+
+                                                    <img src="{{asset('images/profile/'. $tripRequest->driver->profile )}}" alt="Current Image" style="width: 70px; height: 70px; border-radius: 50%;">
                                                 @else
                                                 No Image
                                                 @endif
@@ -148,7 +161,7 @@
                                         <tr>
                                             <td>
                                                 @if($tripRequest->driver)
-                                                    <img src="{{asset('images/carImage/'. $tripRequest->driver->car->car_image )}}" alt="Current Image" style="max-width: 50px;height: 50px;">
+                                                    <img src="{{asset('images/carImage/'. $tripRequest->driver->car->car_image )}}" alt="Current Image" style="width: 70px; height: 70px;">
                                                 @else
                                                     No Image
                                                 @endif

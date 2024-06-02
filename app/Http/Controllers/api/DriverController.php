@@ -287,7 +287,6 @@ class DriverController extends Controller
             // Remove the fleetType relationship from the car object
             unset($driver->car->fleetType);
         }
-
         return response()->json(['driver' => $driver], 200);
     }
 
