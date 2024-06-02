@@ -257,7 +257,24 @@ class DriverController extends Controller
     public function manualSpecificTrip($id)
     {
 
-        $tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->get();
+        //$tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->get();
+        $baseUrl = url('/');
+        //dd($baseUrl);
+
+        $tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->latest()->get();
+
+        // Append link to each trip request
+        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
+            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $request->id;
+            return $request;
+        });
+
+        // Append encrypted link to each trip request
+        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
+            $encryptedId = encrypt($request->id); // Encrypting the ID
+            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
+            return $request;
+        });
         return response()->json(['manualTripList' => $tripRequest], 200);
     }
 
