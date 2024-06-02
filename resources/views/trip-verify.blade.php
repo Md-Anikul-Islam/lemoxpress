@@ -24,7 +24,7 @@
 <div class="wrapper">
     <div class="navbar-custom">
         <div class="topbar container-fluid">
-            <img src="http://127.0.0.1:8000/backend/images/lemo.svg" alt="logo" style="height: 50px;">
+            <img src="{{URL::to('backend/images/lemo.svg')}}" alt="logo" style="height: 50px;">
         </div>
     </div>
 
