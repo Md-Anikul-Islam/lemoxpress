@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('destination_address');
             $table->string('time');
             $table->float('total_fare');
+            $table->string('trip_type')->default('request_trip');
             $table->timestamps();
         });
     }

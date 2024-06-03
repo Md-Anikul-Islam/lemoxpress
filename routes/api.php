@@ -58,3 +58,9 @@ Route::post('/delete-user', [UserController::class, 'deleteUser']);
 Route::post('update-user-profile/{id}', [UserController::class, 'updateUserProfile']);
 
 
+//driver history trip request and manually trip request
+Route::get('/get-driver-history-all/{did}', [DriverController::class, 'driverTripHistoryAll']);
+
+
+
+

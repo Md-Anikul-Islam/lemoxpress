@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('calculated_fare');
             $table->string('fare_received_status')->nullable(); //1=estimated_fare,2=calculated_fare
             $table->string('is_complete')->default(0);
+            $table->string('trip_type')->default('menual_trip');
             $table->timestamps();
         });
     }

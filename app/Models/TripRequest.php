@@ -19,11 +19,17 @@ class TripRequest extends Model
         'calculated_fare',
         'fare_received_status',
         'is_complete',
+        'trip_type'
     ];
 
     public function driver()
     {
         return $this->belongsTo(Driver::class, 'driver_id', 'did');
+    }
+
+    public function userHistories()
+    {
+        return $this->hasMany(UserHistory::class, 'did', 'driver_id');
     }
 
 }

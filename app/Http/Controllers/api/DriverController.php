@@ -8,6 +8,7 @@ use App\Models\DriverHistory;
 use App\Models\DriverRatting;
 use App\Models\Fleet;
 use App\Models\TripRequest;
+use App\Models\UserHistory;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -229,12 +230,7 @@ class DriverController extends Controller
 
     public function manualTripList()
     {
-        //$baseUrl = 'https://taxiapp.etldev.xyz'; // Your dynamic base URL
-
-
-         $baseUrl = url('/');
-         //dd($baseUrl);
-
+        $baseUrl = url('/');
         $tripRequest = TripRequest::with('driver','driver.car')->latest()->get();
 
         // Append link to each trip request
@@ -257,17 +253,14 @@ class DriverController extends Controller
     public function manualSpecificTrip($id)
     {
 
-        //$tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->get();
+
         $baseUrl = url('/');
-        //dd($baseUrl);
-
         $tripRequest = TripRequest::where('driver_id',$id)->with('driver','driver.car')->latest()->get();
-
         // Append link to each trip request
-        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
-            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $request->id;
-            return $request;
-        });
+//        $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
+//            $request->link = $baseUrl . '/get-specific-driver-trip-history/' . $request->id;
+//            return $request;
+//        });
 
         // Append encrypted link to each trip request
         $formattedTripRequests = $tripRequest->map(function ($request) use ($baseUrl) {
@@ -310,5 +303,129 @@ class DriverController extends Controller
 
 
 
+
+
+
+//    public function driverTripHistoryAll($did)
+//    {
+//        $tripRequests = TripRequest::with('userHistories.user')->where('driver_id', $did)->get();
+//
+//        $histories = [];
+//
+//        $uniqueHistories = [];
+//
+//        foreach ($tripRequests as $tripRequest) {
+//            $histories[] = [
+//                'driver_id' => $tripRequest->driver_id,
+//                'passenger_name' => $tripRequest->passenger_name,
+//                'passenger_phone' => '+88'.$tripRequest->passenger_phone,
+//                'origin_address' => $tripRequest->origin_address,
+//                'destination_address' => $tripRequest->destination_address,
+//                'time' => $tripRequest->time,
+//                'total_fare' => null,
+//                'estimated_fare' => $tripRequest->estimated_fare,
+//                'calculated_fare' => $tripRequest->calculated_fare,
+//                'fare_received_status' => $tripRequest->fare_received_status,
+//                'is_complete' => $tripRequest->is_complete,
+//                'trip_type' => $tripRequest->trip_type,
+//
+//            ];
+//
+//            // Add the related user histories data to uniqueHistories array if not already added
+//            foreach ($tripRequest->userHistories as $history) {
+//                if (!isset($uniqueHistories[$history->id])) {
+//                    $uniqueHistories[$history->id] = [
+//                        'driver_id' => $history->did,
+//                        'passenger_name' => $history->user->name ?? null,
+//                        'passenger_phone' => $history->user->phone ?? null,
+//                        'origin_address' => $history->origin_address,
+//                        'destination_address' => $history->destination_address,
+//                        'time' => $history->time,
+//                        'total_fare' => $history->total_fare,
+//                        'estimated_fare' => null,
+//                        'calculated_fare' => null,
+//                        'fare_received_status' => null,
+//                        'is_complete' => null,
+//                        'trip_type' => $history->trip_type,
+//
+//                    ];
+//                }
+//            }
+//        }
+//
+//        // Merge unique histories into the main histories array
+//        $histories = array_merge($histories, array_values($uniqueHistories));
+//
+//        return response()->json(['histories' => $histories]);
+//    }
+
+    public function driverTripHistoryAll($did)
+    {
+        // Fetch trip requests with user histories, user and driver information including car details
+        $baseUrl = url('/');
+        $tripRequests = TripRequest::with(['userHistories.user', 'driver.car'])
+            ->where('driver_id', $did)
+            ->get();
+
+        $histories = [];
+        $uniqueHistories = [];
+
+        foreach ($tripRequests as $tripRequest) {
+            $car = $tripRequest->driver->car;
+
+
+            $encryptedId = encrypt($tripRequest->id); // Encrypting the ID
+            $link = $baseUrl . '/get-specific-driver-trip-history/' . $encryptedId;
+
+            // Add the trip request data to histories array with car details
+            $histories[] = [
+                'driver_id' => $tripRequest->driver_id,
+                'passenger_name' => $tripRequest->passenger_name,
+                'passenger_phone' => '+88' . $tripRequest->passenger_phone,
+                'origin_address' => $tripRequest->origin_address,
+                'destination_address' => $tripRequest->destination_address,
+                'time' => $tripRequest->time,
+                'total_fare' => null,
+                'estimated_fare' => $tripRequest->estimated_fare,
+                'calculated_fare' => $tripRequest->calculated_fare,
+                'fare_received_status' => $tripRequest->fare_received_status,
+                'is_complete' => $tripRequest->is_complete,
+                'trip_type' => $tripRequest->trip_type,
+                'car_name' => $car->car_name ?? null,
+                'car_model' => $car->car_model ?? null,
+                'car_image' => $car->car_image ?? null,
+                'link' => $link,
+            ];
+
+            // Add the related user histories data to uniqueHistories array if not already added
+            foreach ($tripRequest->userHistories as $history) {
+                if (!isset($uniqueHistories[$history->id])) {
+                    $uniqueHistories[$history->id] = [
+                        'driver_id' => $history->did,
+                        'passenger_name' => $history->user->name ?? null,
+                        'passenger_phone' => $history->user->phone ?? null,
+                        'origin_address' => $history->origin_address,
+                        'destination_address' => $history->destination_address,
+                        'time' => $history->time,
+                        'total_fare' => $history->total_fare,
+                        'estimated_fare' => null,
+                        'calculated_fare' => null,
+                        'fare_received_status' => null,
+                        'is_complete' => null,
+                        'trip_type' => $history->trip_type,
+                        'car_name' => $car->car_name ?? null,
+                        'car_model' => $car->car_model ?? null,
+                        'car_image' => $car->car_image ?? null,
+                        'link' => null,
+                    ];
+                }
+            }
+        }
+
+        // Merge unique histories into the main histories array
+        $histories = array_merge($histories, array_values($uniqueHistories));
+
+        return response()->json(['histories' => $histories]);
+    }
 
 }
