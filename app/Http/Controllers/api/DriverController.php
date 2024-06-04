@@ -388,7 +388,7 @@ class DriverController extends Controller
             $histories[] = [
                 'driver_id' => $tripRequest->driver_id,
                 'passenger_name' => $tripRequest->passenger_name,
-                'passenger_phone' => '+88' . $tripRequest->passenger_phone,
+                'passenger_phone' => $tripRequest->passenger_phone,
                 'origin_address' => $tripRequest->origin_address,
                 'destination_address' => $tripRequest->destination_address,
                 'time' => $tripRequest->time,
