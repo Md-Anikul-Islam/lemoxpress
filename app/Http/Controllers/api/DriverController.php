@@ -466,7 +466,7 @@ class DriverController extends Controller
     public function driverProfileUpdate(Request $request, $id)
     {
 
-        $driver = Driver::where('did', $id)->first();
+        $driver = Driver::where('did', $id)->with('car')->first();
         $request->validate([
             'profile' => 'required|image',
         ]);
@@ -482,7 +482,7 @@ class DriverController extends Controller
 
     public function driverInfoUpdate(Request $request, $id)
     {
-        $driver = Driver::where('did', $id)->first();
+        $driver = Driver::where('did', $id)->with('car')->first();
 
         if (!$driver) {
             return response()->json(['message' => 'Driver not found'], 404);
