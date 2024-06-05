@@ -34,6 +34,8 @@ class DriverController extends Controller
         $driver->email = $request->email;
         $driver->phone = $request->phone;
         $driver->address = $request->address;
+        $driver->gender = $request->gender;
+        $driver->dob = $request->dob;
         $driver->status = "0"; // Set as string
         $driver->ratting = "0"; // Set as string
         if($request->profile){
@@ -459,4 +461,53 @@ class DriverController extends Controller
         return response()->json(['histories' => $histories]);
     }
 
+
+
+    public function driverProfileUpdate(Request $request, $id)
+    {
+
+        $driver = Driver::where('did', $id)->first();
+        $request->validate([
+            'profile' => 'required|image',
+        ]);
+        if($request->profile){
+            $profile = time().'.'.$request->profile->extension();
+            $request->profile->move(public_path('images/profile'), $profile);
+            $driver->profile = $profile;
+        }
+        $driver->save();
+        return response()->json(['message' => 'Profile updated successfully', 'driver' => $driver]);
+
+    }
+
+    public function driverInfoUpdate(Request $request, $id)
+    {
+        $driver = Driver::where('did', $id)->first();
+
+        if (!$driver) {
+            return response()->json(['message' => 'Driver not found'], 404);
+        }
+
+        // Update fields only if they are provided in the request
+        if ($request->has('name')) {
+            $driver->name = $request->name;
+        }
+        if ($request->has('email')) {
+            $driver->email = $request->email;
+        }
+        if ($request->has('gender')) {
+            $driver->gender = $request->gender;
+        }
+        if ($request->has('dob')) {
+            $driver->dob = $request->dob;
+        }
+        if ($request->has('address')) {
+            $driver->address = $request->address;
+        }
+
+        // Save the updated driver data
+        $driver->save();
+
+        return response()->json(['message' => 'Driver information updated successfully', 'driver' => $driver]);
+    }
 }

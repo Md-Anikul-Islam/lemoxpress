@@ -14,6 +14,8 @@ class Driver extends Model
         'car_id',
         'name',
         'email',
+        'gender',
+        'dob',
         'phone',
         'address',
         'profile',

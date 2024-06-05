@@ -62,5 +62,9 @@ Route::post('update-user-profile/{id}', [UserController::class, 'updateUserProfi
 Route::get('/get-driver-history-all/{did}', [DriverController::class, 'driverTripHistoryAll']);
 
 
+//driver profile update
+Route::post('/driver-profile-update/{did}', [DriverController::class, 'driverProfileUpdate']);
 
+//driver info update
+Route::post('/driver-info-update/{did}', [DriverController::class, 'driverInfoUpdate']);
 
